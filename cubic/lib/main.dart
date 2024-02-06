@@ -26,30 +26,31 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Cubic'),
-      ),
-      body: Column(
-        children: [
-          Center(
-            child: BlocBuilder<CounterCubit, int>(
+        appBar: AppBar(
+          title: Text('Flutter Cubic'),
+        ),
+        body: Column(
+          children: [
+            BlocBuilder<CounterCubit, int>(
               builder: (context, state) {
-                return Text('The Value is ${state}', style: TextStyle(
-                    fontSize: 20.0
-                ),);
+                return Text('The Value is ${state}');
               },
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.add)),
-              SizedBox(width: 40,),
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.remove)),
-            ],
-          )
-        ],
-      ),
+            SizedBox(height: 30.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(onPressed: () {
+                  BlocProvider.of<CounterCubit>(context).increment();
+                }, child: Text('Add')),
+                SizedBox(width: 20.0,),
+                ElevatedButton(onPressed: () {
+                  BlocProvider.of<CounterCubit>(context).decrement();
+                }, child: Text('Minus')),
+              ],
+            ),
+          ],
+        )
     );
   }
 }
