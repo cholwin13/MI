@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_pj_mi/ui/screens/MainScreen.dart';
 import 'package:test_pj_mi/ui/screens/buyOnline/buy_online.dart';
-import 'package:test_pj_mi/ui/screens/calculator/CalculatorScreen.dart';
 import 'package:test_pj_mi/ui/screens/contact/ContactScreen.dart';
+import 'package:test_pj_mi/ui/screens/generalInsurance/general_screen.dart';
 import 'package:test_pj_mi/ui/screens/home/HomeScreen.dart';
 import 'package:test_pj_mi/ui/screens/login/enter_code_screen.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_invoice_no.dart';
@@ -23,7 +23,22 @@ import '../ui/screens/faqs/faqs.dart';
 import '../ui/screens/login/forget_pwd_screen.dart';
 import '../ui/screens/login/login.dart';
 import '../ui/screens/login/registration_screen.dart';
+import '../ui/screens/premiumCalculator/CalculatorScreen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/additional_risk_cover_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/fireAllied/fire_additional_cover_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/motor/cycle_usd_additional_risk_cover_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/motor/motor_additional_risk_cover_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/motor/motor_premium_and_coverage_detail_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/premium_and_coverage_details_addon_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/premium_and_coverage_details_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/travel/local_and_foreign_travel_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/travel/travel_pc_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/travel/under_mile_screen.dart';
+import '../ui/screens/premiumCalculator/generalInsurance/travel/widget/teavel_premium_details_screen.dart';
 import '../ui/screens/settings/Settings.dart';
+import '../ui/widgets/coverage_type_picker_list.dart';
+import '../ui/widgets/premium_details_arguments_list.dart';
+import '../ui/widgets/widget_coverage_type_picker.dart';
 
 class CustomNavigationHelper {
   CustomNavigationHelper._();
@@ -206,6 +221,21 @@ class CustomNavigationHelper {
             ],
           ),
 
+          /// General Insurance
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.homeGeneralInsurance.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const GeneralScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
           ///Buy Online
           StatefulShellBranch(
             routes: [
@@ -351,6 +381,188 @@ class CustomNavigationHelper {
                 pageBuilder: (context, state) {
                   return MaterialPage(
                     child: const EnterCodeScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          ///General Insurance (Premium Calculator)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.generalInsAdditionalRiskCoverPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: AdditionalRiskCoverScreen(
+                      arguments: state.extra as PremiumDetailsArguments,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.generalInsPremiumDetailsAndCoverageAddOnPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: PremiumAndCoverageDetailsAddOnScreen(
+                      arguments: state.extra as PremiumDetailsArguments,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.generalInsPremiumDetailsAndCoveragePath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: PremiumAndCoverageDetailsScreen(
+                      arguments: state.extra as PremiumDetailsArguments,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// General Insurance (Motor)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.motorPremiumDetailPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: MotorPremiumAndCoverageDetailScreen(isMMK: state.extra as bool),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.motorPremiumCalculatorAdditionalRiskCoverPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: MotorAdditionalRiskCoverScreen(isMMK: state.extra as bool,),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.motorCycleUSDAdditionalRiskCoverPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: CycleUSDAdditionalRiskScreen(isMMK: state.extra as bool),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          ///General Insurance Premium Calculator (Fire)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.fireAdditionalCoverPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: FireAdditionalCoverScreen(isMMK: state.extra as bool),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.coverageTypePickerPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: CoverageTypePickerWidget(
+                      arguments: state.extra as CoverageTypePickerList,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// General Insurance Premium Calculator (Travel)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.travelPClLocalPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const LocalAndForeignTravel(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.travelPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const TravelPCScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.travelPCUnderPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const UnderMileScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.travelPremiumDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: TravelPremiumDetailsScreen(
+                      arguments: state.extra as PremiumDetailsArguments,
+                    ),
                     key: state.pageKey,
                   );
                 },

@@ -35,7 +35,7 @@ enum Routes {
   depositPath('deposit', '/deposit'),
   marineCargoPath('marineCargo', '/marineCargo'),
   marineHullPath('marineHull', '/marineHull'),
-  travelPath('travel', '/travel'),
+  // travelPath('travel', '/travel'),
   shipOwnerPath('shipOwner', '/shipOwner'),
   kyarFishingPath('kyarFishing', '/kyarFishing'),
   creditGuaranteePath('creditGuarantee', '/creditGuarantee'),
@@ -90,6 +90,30 @@ enum Routes {
   /// Online Biller
   onlineBillerPaymentInfoPath('onlineBillerPaymentInfo','/onlineBillerPaymentInfo'),
   onlineBillerPaymentInfoDetailsPath('onlineBillerPaymentInfoDetails', '/onlineBillerPaymentInfoDetails'),
+
+  /// General Insurance Premium Calculator
+  generalInsPremiumDetailsAndCoverageAddOnPath('premiumDetailsAndCalculator', '/premiumDetailsAndCalculator'),
+  generalInsPremiumDetailsAndCoveragePath('premiumDetailsAndCoverage', '/premiumDetailsAndCoverage'),
+  generalInsAdditionalRiskCoverPath('generalInsAdditionalRiskCover', '/generalInsAdditionalRiskCover'),
+
+  /// General Insurance Premium Calculator (Motor)
+  motorPremiumCalculatorAdditionalRiskCoverPath('motorPCAdditionalRiskCover', '/motorPCAdditionalRiskCover'),
+  motorPremiumDetailPath('motorPremiumDetail', '/motorPremiumDetail'),
+  motorCycleUSDAdditionalRiskCoverPath('motorCyclePCAdditionalRiskCover', '/motorCyclePCAdditionalRiskCover'),
+
+  ///General Insurance Premium Calculator (Fire)
+  fireAdditionalCoverPath('fireAdditionalCover','/fireAdditionalCover'),
+  fireAdditionalRiskCoverPath('fireAdditionalRiskCover', '/fireAdditionalRiskCover'),
+
+  /// Life Insurance Premium Calculator
+  coverageTypePickerPath('coverageTypePicker', '/coverageTypePicker'),
+
+  /// General Insurance Premium Calculator (Travel)
+  travelPClLocalPath('travelPCLocal', '/travelPCLocal'),
+  travelPCForeignPath('travelPCForeign', '/travelPCForeign'),
+  travelPath('travel', '/travel'),
+  travelPCUnderPath('travelPCUnder', '/travelPCUnder'),
+  travelPremiumDetailsPath('travelPremiumDetails', '/travelPremiumDetails'),
 
   /// Bottom Navigation Screens
   homePath("home", '/homePath'),
