@@ -20,6 +20,7 @@ import '../ui/screens/contact/widget/branches_map.dart';
 import '../ui/screens/contact/widget/branches_modal.dart';
 import '../ui/screens/container_route.dart';
 import '../ui/screens/faqs/faqs.dart';
+import '../ui/screens/lifeInsurance/life_screen.dart';
 import '../ui/screens/login/forget_pwd_screen.dart';
 import '../ui/screens/login/login.dart';
 import '../ui/screens/login/registration_screen.dart';
@@ -234,6 +235,21 @@ class CustomNavigationHelper {
                 pageBuilder: (context, state) {
                   return MaterialPage(
                     child: const GeneralScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Life Insurance
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.homeLifeInsurance.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const LifeScreen(),
                     key: state.pageKey,
                   );
                 },
