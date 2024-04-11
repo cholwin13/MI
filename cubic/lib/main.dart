@@ -1,7 +1,11 @@
 import 'package:cubic/cubic/counter_cubit.dart';
 import 'package:cubic/cubic/network_loading_cubit.dart';
+import 'package:cubic/datePicker/date_picker_intl.dart';
+import 'package:cubic/datePicker/holo_date_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'keyvoardAvoid/demo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +22,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<NetworkLoadingCubit>(create: (_) => NetworkLoadingCubit()),
       ],
       child: MaterialApp(
-        home: Home(),
+        // home: Home(),
+        home: Demo(),
+        // home: DatePickerIntl(),
       ),
     );
   }
