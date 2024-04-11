@@ -38,7 +38,7 @@ class VisionAndMission extends StatelessWidget {
                   Row(
                     children: [
                       Image.asset(
-                        AppImages.visionIcon,
+                        AppImages.homeVisionIcon,
                         width: iconLarge,
                         height: iconLarge,
                       ),

@@ -6,6 +6,7 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 
 import '../../helper/dimens.dart';
 import '../../helper/navigation_routes.dart';
+import '../../routes/app_routes.dart';
 import 'card_view_vo.dart';
 
 class NavigableGridViewWidget extends StatelessWidget {

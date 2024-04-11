@@ -6,6 +6,7 @@ import 'package:test_pj_mi/helper/app_fonts.dart';
 import '../../../../helper/dimens.dart';
 import '../../../helper/app_images.dart';
 import '../../../helper/navigation_routes.dart';
+import '../../../routes/app_routes.dart';
 
 class DrawerScreen extends StatelessWidget {
   // final void Function(int) onTap;

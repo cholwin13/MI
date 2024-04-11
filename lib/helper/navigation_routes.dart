@@ -6,104 +6,24 @@ import 'package:test_pj_mi/ui/screens/buyOnline/buy_online.dart';
 import 'package:test_pj_mi/ui/screens/calculator/CalculatorScreen.dart';
 import 'package:test_pj_mi/ui/screens/contact/ContactScreen.dart';
 import 'package:test_pj_mi/ui/screens/home/HomeScreen.dart';
-import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller.dart';
+import 'package:test_pj_mi/ui/screens/login/enter_code_screen.dart';
+import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_invoice_no.dart';
+import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_details_screen.dart';
+import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_screen.dart';
 import 'package:test_pj_mi/ui/screens/printCertificate/print_certificate.dart';
 import 'package:test_pj_mi/ui/screens/visionAndMission/vision_and_mission.dart';
 
+import '../routes/app_routes.dart';
 import '../ui/screens/aboutUs/about_us.dart';
 import '../ui/screens/contact/google_map_screen.dart';
 import '../ui/screens/contact/widget/branches_map.dart';
 import '../ui/screens/contact/widget/branches_modal.dart';
 import '../ui/screens/container_route.dart';
 import '../ui/screens/faqs/faqs.dart';
-import '../ui/screens/login/Login.dart';
+import '../ui/screens/login/forget_pwd_screen.dart';
+import '../ui/screens/login/login.dart';
+import '../ui/screens/login/registration_screen.dart';
 import '../ui/screens/settings/Settings.dart';
-
-enum Routes {
-  root('home', '/'),
-
-  ///Home Screens
-  visionAndMission('vision', '/vision'),
-  homeGeneralInsurance('homeGeneralInsurance', '/homeGeneralInsurance'),
-  homeLifeInsurance('homeLifeInsurance', '/homeLifeInsurance'),
-  homeBuyOnline('homeBuyOnline', '/homeBuyOnline'),
-  homeOnlineBiller('homeOnlineBiller', '/homeOnlineBiller'),
-  homePrintCertificate('homePrintCertificate', '/homePrintCertificate'),
-
-  /// Drawer Screens
-  aboutUs('aboutUs', '/aboutUs'),
-  contactPath('contact', '/contactPath'),
-  faqs('faqs', '/faqs'),
-  settings('setting', '/setting'),
-  login('login', '/login'),
-  googleMapScreen('googleMapScreen', '/googleMapScreen'),
-
-  ///General Insurance
-  tplPath('tpl', '/tpl'),
-  motorPath('motor', '/motor'),
-  fireAndAlliedPath('fire', '/fire'),
-  burglaryPath('burglary', '/burglary'),
-  fidelityPath('fidelity', '/fidelity'),
-  cashInSafePath('cashInSafe', '/cashInSafe'),
-  cashInTransitPath('cashInTransit', '/cashInTransit'),
-  personalAccidentPath('personalAccident', '/personalAccident'),
-  personalAccidentAndDisease(
-      'personalAccidentAndDisease', '/personalAccidentAndDisease'),
-  workmenPath('workmen', '/workmen'),
-  liabilityPath('liability', '/liability'),
-  contractorPath('contractor', '/contractor'),
-  machineryPath('machinery', '/machinery'),
-  depositPath('deposit', '/deposit'),
-  marineCargoPath('marineCargo', '/marineCargo'),
-  marineHullPath('marineHull', '/marineHull'),
-  travelPath('travel', '/travel'),
-  shipOwnerPath('shipOwner', '/shipOwner'),
-  kyarFishingPath('kyarFishing', '/kyarFishing'),
-  creditGuaranteePath('creditGuarantee', '/creditGuarantee'),
-  reinsurancePath('reinsurance', '/reinsurance'),
-  electronicEquipmentPath('electronicEquipment', '/electronicEquipment'),
-  minerLiabilityPath('minerLiability', '/minerLiability'),
-  erectionAllRisk('erectionAllRisk', '/erectionAllRisk'),
-  contractorAllRisk('contractorAllRisk', '/contractorAllRisk'),
-
-  /// Life Insurance
-  govPersonalShortTermPath('govPersonalShortTerm', '/govPersonalShortTerm'),
-  govPersonalPath('govPersonal', '/govPersonal'),
-  militaryPath('military', '/military'),
-  publicPath('public', '/public'),
-  shortTermEndowmentPath('shortTermEndowment', '/shortTermEndowment'),
-  educationPath('education', '/education'),
-  studentPath('student', '/student'),
-  shoreJobPath('shoreJob', '/shoreJob'),
-  seamanPath('seaman', '/seaman'),
-  farmerPath('farmer', '/farmer'),
-  snakeBitePath('snakeBite', '/snakeBite'),
-  groupPath('group', '/group'),
-  publicTermPath('publicTerm', '/publicTerm'),
-  sportMenPath('sportMen', '/sportMen'),
-  healthPath('health', '/health'),
-  criticalIllnessPath('criticalIllness', '/criticalIllness'),
-  microHealthPath('microHealth', '/microHealth'),
-  singlePremiumCreditPath('singlePremiumCredit', '/singlePremiumCredit'),
-  shortTermSinglePremiumPath(
-      'shortTermSinglePremium', '/shortTermSinglePremium'),
-  singlePremiumEndowmentPath(
-      'singlePremiumEndowment', '/singlePremiumEndowment'),
-  smartSavingPath('smartSaving', '/smartSaving'),
-  seamanPlanPath('seamanPlan', '/seamanPlan'),
-
-  ///Container Route
-  containerRoutePath('containerRoute', '/containerRoute'),
-  branchesMapPath('branchesMap','/branchesMap'),
-
-  /// Bottom Navigation Screens
-  homePath("home", '/homePath'),
-  calculatorPath('calculator', '/calculatorPath');
-
-  const Routes(this.name, this.path);
-  final String name;
-  final String path;
-}
 
 class CustomNavigationHelper {
   CustomNavigationHelper._();
@@ -146,17 +66,17 @@ class CustomNavigationHelper {
                     key: state.pageKey,
                   );
                 },
-                routes: [
-                  GoRoute(
-                    path: 'subhome',
-                    name: 'SubHome',
-                    builder: (context, state) {
-                      return VisionAndMission(
-                        key: state.pageKey,
-                      );
-                    },
-                  ),
-                ],
+                // routes: [
+                //   GoRoute(
+                //     path: 'subhome',
+                //     name: 'SubHome',
+                //     builder: (context, state) {
+                //       return VisionAndMission(
+                //         key: state.pageKey,
+                //       );
+                //     },
+                //   ),
+                // ],
               ),
             ],
           ),
@@ -272,19 +192,19 @@ class CustomNavigationHelper {
           ),
 
           /// Vision And Mission
-          // StatefulShellBranch(
-          //   routes: [
-          //     GoRoute(
-          //       path: Routes.visionAndMission.path,
-          //       pageBuilder: (context, state) {
-          //         return MaterialPage(
-          //           child: const VisionAndMission(),
-          //           key: state.pageKey,
-          //         );
-          //       },
-          //     ),
-          //   ],
-          // ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.visionAndMission.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const VisionAndMission(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
 
           ///Buy Online
           StatefulShellBranch(
@@ -308,7 +228,35 @@ class CustomNavigationHelper {
                 path: Routes.homeOnlineBiller.path,
                 pageBuilder: (context, state) {
                   return MaterialPage(
-                    child: const OnlineBiller(),
+                    child: const OnlineBillerInvoiceNo(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.onlineBillerPaymentInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OnlineBillerPaymentInfo(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.onlineBillerPaymentInfoDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OnlineBillerPaymentInfoDetailsScreen(),
                     key: state.pageKey,
                   );
                 },
@@ -350,6 +298,7 @@ class CustomNavigationHelper {
             ],
           ),
 
+          ///Branches
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -366,43 +315,52 @@ class CustomNavigationHelper {
             ],
           ),
 
-          // ///Branch Setting
-          // StatefulShellBranch(
-          //   navigatorKey: _rootNavigationSetting,
-          //   routes: [
-          //     GoRoute(
-          //       path: '/setting',
-          //       name: 'Setting',
-          //       builder: (context, state) {
-          //         return SettingsView(
-          //           key: state.pageKey,
-          //         );
-          //       },
-          //       routes: [
-          //         GoRoute(
-          //           path: 'subSetting',
-          //           name: 'SubSetting',
-          //           builder: (context, state) {
-          //             return SubSettingsView(
-          //               key: state.pageKey,
-          //             );
-          //           },
-          //         ),
-          //       ],
-          //     )
-          //   ],
-          // ),
+          /// Login
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.forgetPwdPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const ForgetPwdScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.registrationPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const RegistrationScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.enterCodePath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const EnterCodeScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+
         ],
       ),
-      // GoRoute(
-      //   path: '/player',
-      //   name: 'Player',
-      //   builder: (context, state) {
-      //     return PlayerView(
-      //       key: state.pageKey,
-      //     );
-      //   },
-      // ),
     ],
   );
 }
