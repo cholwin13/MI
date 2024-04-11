@@ -19,6 +19,22 @@ import 'generalInsurance/motor/motor_premium_calculator_screen.dart';
 import 'generalInsurance/personalAccidentAndDisease/personalAccident_premium_calculator_screen.dart';
 import 'generalInsurance/thirdParty/tpl_premium_calculator_car_number.dart';
 import 'generalInsurance/travel/travel_premium_calculator_screen.dart';
+import 'lifeInsurance/criitical/critical_illness_pc_screen.dart';
+import 'lifeInsurance/farmer/farmer_life_screen.dart';
+import 'lifeInsurance/govPersonal/gov_personal_screen.dart';
+import 'lifeInsurance/govPersonalShortTerm/gov_personal_short_term_screen.dart';
+import 'lifeInsurance/groupLife/group_life_screen.dart';
+import 'lifeInsurance/health/health_life_screen.dart';
+import 'lifeInsurance/microHealth/micro_health_pc_screen.dart';
+import 'lifeInsurance/publicLife/public_life_screen.dart';
+import 'lifeInsurance/publicTermLife/public_term_screen.dart';
+import 'lifeInsurance/seamen/seamen_life_screen.dart';
+import 'lifeInsurance/seamenPlan/seamem_plan_screen.dart';
+import 'lifeInsurance/shore_job/shore_job_pc_screen.dart';
+import 'lifeInsurance/short_term_endowment/short_term_endowment_pc_screen.dart';
+import 'lifeInsurance/snakeBite/snake_bite_pc_screen.dart';
+import 'lifeInsurance/sportsmen/sport_men_pc_screen.dart';
+import 'lifeInsurance/student/student_life_screen.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -53,60 +69,38 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   ];
 
   final List<CardViewVO> lifeList = [
-    CardViewVO(AppImages.generalTlpIcon, 'tpl_title', const TplPremiumCalculatorCarNumberScreen()),
+    CardViewVO(AppImages.lifePublicIcon, 'public_life_insurance', const PublicLifeAssuranceScreen()),
 
-    CardViewVO(AppImages.generalMotorIcon, 'motor_title', const MotorPremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeShortTermEndowmentIcon, 'short_term_endowment_insurance', const ShortTermEndowmentPCScreen()),
 
-    CardViewVO(AppImages.generalFireAlliedIcon, 'fire_and_allied_title', const FirePremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeStudentIcon, 'student_insurance', const StudentLifeScreen()),
 
-    CardViewVO(AppImages.generalFidelityIcon, 'fidelity_title', const FidelityPremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeFarmerIcon, 'farmer_insurance', const FarmerLifeScreen()),
 
-    CardViewVO(AppImages.generalCashInSafeIcon, 'cash_in_safe_title', const CashInSafePremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeSnakeBiteIcon, 'snake_insurance', const SnakeBitePCScreen()),
 
-    CardViewVO(AppImages.generalCashInTransitIcon, 'cash_in_transit_title', const CashInTransitPremiumCalculator()),
+    CardViewVO(AppImages.lifeGroupIcon, 'group_insurance', const GroupLifeScreen()),
 
-    CardViewVO(AppImages.generalPersonalAccidenntIcon, 'personal_accident_title', const PersonalAccidentPremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeSportMenIcon, 'sportsmen_insurance', const SportMenPCScreen()),
 
-    CardViewVO(AppImages.generalMarineIcon, 'marine_cargo_title', const MarineCargoPremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeHealthIcon, 'health_insurance', const HealthLifeScreen()),
 
-    CardViewVO(AppImages.generalMarineHullIcon, 'marine_hull_and_machinery_title', const MarineHullPremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeCriticalIcon, 'critical_insurance', const CriticalIllnessPCScreen()),
 
-    CardViewVO(AppImages.generalTravelIcon, 'travel_title', const TravelPremiumCalculatorScreen()),
+    CardViewVO(AppImages.lifeMicroIllnessIcon, 'micro_health_insurance', const MicroHealthPCScreen()),
+
+    CardViewVO(AppImages.lifeSeamanIcon, 'seaman_insurance', const SeamanLifeScreen()),
+
+    CardViewVO(AppImages.lifeShoreJobIcon, 'shore_job_insurance', const ShoreJobPCScreen()),
+
+    CardViewVO(AppImages.lifePublicTermIcon, 'public_insurance', const PublicTermLifePCScreen()),
+
+    CardViewVO(AppImages.lifeGovPersonalShortTermIcon, 'government_personal_insurance', const GovernmentPersonalScreen()),
+
+    CardViewVO(AppImages.lifeGovPersonalShortTermIcon, 'government_short_term_insurance', const GovernmentPersonalShortTermScreen()),
+
+    CardViewVO(AppImages.lifeSeamanIcon, 'seaman_plan_insurance', const SeamanPlanPCScreen()),
   ];
-
-  // final List<CardViewVO> lifeList = [
-  //   CardViewVO(AppImages.lifePublicIcon, 'public_life_insurance', const PublicLifeAssuranceScreen()),
-  //
-  //   CardViewVO(AppImages.lifeShortTermEndowmentIcon, 'short_term_endowment_insurance', const ShortTermEndowmentPCScreen()),
-  //
-  //   CardViewVO(AppImages.lifeStudentIcon, 'student_insurance', const StudentLifeScreen()),
-  //
-  //   CardViewVO(AppImages.lifeFarmerIcon, 'farmer_insurance', const FarmerLifeScreen()),
-  //
-  //   CardViewVO(AppImages.lifeSnakeBiteIcon, 'snake_insurance', const SnakeBitePCScreen()),
-  //
-  //   CardViewVO(AppImages.lifeGroupIcon, 'group_insurance', const GroupLifeScreen()),
-  //
-  //   CardViewVO(AppImages.lifeSportMenIcon, 'sportsmen_insurance', const SportMenPCScreen()),
-  //
-  //   CardViewVO(AppImages.lifeHealthIcon, 'health_insurance', const HealthLifeScreen()),
-  //
-  //   CardViewVO(AppImages.lifeCriticalIcon, 'critical_insurance', const CriticalIllnessPCScreen()),
-  //
-  //   CardViewVO(AppImages.lifeMicroIllnessIcon, 'micro_health_insurance', const MicroHealthPCScreen()),
-  //
-  //   CardViewVO(AppImages.lifeSeamanIcon, 'seaman_insurance', const SeamanLifeScreen()),
-  //
-  //   CardViewVO(AppImages.lifeShoreJobIcon, 'shore_job_insurance', const ShoreJobPCScreen()),
-  //
-  //   CardViewVO(AppImages.lifePublicTermIcon, 'public_insurance', const PublicTermLifePCScreen()),
-  //
-  //   CardViewVO(AppImages.lifeGovPersonalShortTermIcon, 'government_personal_insurance', const GovernmentPersonalScreen()),
-  //
-  //   CardViewVO(AppImages.lifeGovPersonalShortTermIcon, 'government_short_term_insurance', const GovernmentPersonalShortTermScreen()),
-  //
-  //   CardViewVO(AppImages.lifeSeamanIcon, 'seaman_plan_insurance', const SeamanPlanPCScreen()),
-  // ];
 
   @override
   Widget build(BuildContext context) {

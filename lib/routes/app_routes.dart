@@ -106,6 +106,7 @@ enum Routes {
   fireAdditionalRiskCoverPath('fireAdditionalRiskCover', '/fireAdditionalRiskCover'),
 
   /// Life Insurance Premium Calculator
+  lifePremiumDetailsPath('lifePremiumDetails', '/lifePremiumDetails'),
   coverageTypePickerPath('coverageTypePicker', '/coverageTypePicker'),
 
   /// General Insurance Premium Calculator (Travel)
@@ -114,6 +115,18 @@ enum Routes {
   travelPath('travel', '/travel'),
   travelPCUnderPath('travelPCUnder', '/travelPCUnder'),
   travelPremiumDetailsPath('travelPremiumDetails', '/travelPremiumDetails'),
+
+  /// Life Insurance PC (Government Personnel Short Term)
+  lifeGovPersonalShortTermPaymentPath('lifeGovPersonalShortTermPayment', '/lifeGovPersonalShortTermPayment'),
+
+  /// Life Insurance PC (Health)
+  healthAdditionalCoverPath('healthAdditionalCover','/healthAdditionalCover'),
+
+  /// Life Insurance PC (Shore Job)
+  lifeShoreJobPaymentPath('lifeShoreJobPayment','/lifeShoreJobPayment'),
+
+  /// Life Insurance PC (Shore Term)
+  lifeShortTermPaymentPath('lifeShortTermPayment','/lifeShortTermPayment'),
 
   /// Bottom Navigation Screens
   homePath("home", '/homePath'),

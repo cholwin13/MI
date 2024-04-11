@@ -35,6 +35,11 @@ import '../ui/screens/premiumCalculator/generalInsurance/travel/local_and_foreig
 import '../ui/screens/premiumCalculator/generalInsurance/travel/travel_pc_screen.dart';
 import '../ui/screens/premiumCalculator/generalInsurance/travel/under_mile_screen.dart';
 import '../ui/screens/premiumCalculator/generalInsurance/travel/widget/teavel_premium_details_screen.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/govPersonalShortTerm/gov_personal_payment_screen.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/health/widget/widget_additional_cover.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/shore_job/shore_job_payment_screen.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/short_term_payment_screen.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/widget/life_premium_details_screen.dart';
 import '../ui/screens/settings/Settings.dart';
 import '../ui/widgets/coverage_type_picker_list.dart';
 import '../ui/widgets/premium_details_arguments_list.dart';
@@ -570,6 +575,82 @@ class CustomNavigationHelper {
             ],
           ),
 
+          ///Life Insurance
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.lifePremiumDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: LifePremiumDetailsScreen(
+                      arguments: state.extra as PremiumDetailsArguments,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Life Insurance PC (Government Personnel Short Term)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.lifeGovPersonalShortTermPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const GovPersonalPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Life Insurance PC (Health)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthAdditionalCoverPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthAdditionalCoverWidget(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Life Insurance PC (Shore Job)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.lifeShoreJobPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const ShoreJobPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Life Insurance PC (Shore Term)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.lifeShortTermPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const ShortTermPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
 
         ],
       ),
