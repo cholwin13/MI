@@ -14,6 +14,9 @@ const kMarginLargeX = 40.0;
 const kMarginLargeX_2 = 48.0;
 const kMarginLargeX_3 = 56.0;
 const kMarginExtraLarge = 60.0;
+const kMarginExtraLarge_1 = 80.0;
+const kMarginExtraLarge_2 = 100.0;
+const kMarginExtraLarge_3 = 140.0;
 
 const textSmall = 10.0;
 const textSmall2X = 12.0;
@@ -38,4 +41,7 @@ const iconLarge_3 = 45.0;
 const drawerHeight = 90.0;
 const boxRadius = 5.0;
 const boxRadius_2 = 8.0;
+const boxRadius_3 = 10.0;
+const alertBoxRadius = 12.0;
+const checkBoxRadius = 2.0;
 const topBarWidgetHeight = 40.0;

@@ -5,9 +5,10 @@ import '../../helper/dimens.dart';
 import '../../helper/navigation_routes.dart';
 
 class CalculatorFloatingBtn extends StatelessWidget {
-  final Routes route;
+  final Routes? route;
+  final Widget? childWidget;
 
-  const CalculatorFloatingBtn({super.key, required this.route});
+  const CalculatorFloatingBtn({super.key, this.route, this.childWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,10 @@ class CalculatorFloatingBtn extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: kMarginSmall_2),
       child: FloatingActionButton.small(
         onPressed: () {
-          CustomNavigationHelper.router.push(route.path);
+          // CustomNavigationHelper.router.push(route.path);
+          CustomNavigationHelper.router.push(Routes.containerRoutePath.path, extra: childWidget);
         },
-        child: Image.asset(AppImages.calculatorIcon, width: iconMedium, height: iconMedium,),
+        child: Image.asset(AppImages.homeCalculatorIcon, width: iconMedium, height: iconMedium,),
       ),
     );
   }

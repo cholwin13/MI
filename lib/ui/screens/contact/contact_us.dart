@@ -69,9 +69,9 @@ class LocationAndPhone extends StatelessWidget {
               ),
               Text('Near By',
                   style: context.appFonts.labelSmall()?.copyWith(
-                    fontSize: 13.0,
-                    color: context.appColors.colorPrimary,
-                  ))
+                        fontSize: 13.0,
+                        color: context.appColors.colorPrimary,
+                      ))
             ],
           ),
           Column(
@@ -98,9 +98,9 @@ class LocationAndPhone extends StatelessWidget {
               ),
               Text('Call Us',
                   style: context.appFonts.labelSmall()?.copyWith(
-                    fontSize: 13.0,
-                    color: context.appColors.colorPrimary,
-                  ))
+                        fontSize: 13.0,
+                        color: context.appColors.colorPrimary,
+                      ))
             ],
           ),
         ],
@@ -190,9 +190,9 @@ class ContactInformation extends StatelessWidget {
             ),
             Expanded(
                 child: Text(
-                  'mail'.tr(),
-                  style: context.appFonts.labelSmall(),
-                )),
+              'mail'.tr(),
+              style: context.appFonts.labelSmall(),
+            )),
           ],
         ),
       ],

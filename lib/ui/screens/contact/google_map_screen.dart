@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/foundation.dart';
-
-import 'map_maker_list.dart';
+import 'package:test_pj_mi/ui/screens/contact/widget/map_maker_list.dart';
 
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({super.key});
@@ -34,10 +33,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     checkPlatform();
   }
 
-  void checkPlatform(){
-    if(defaultTargetPlatform == TargetPlatform.android){
+  void checkPlatform() {
+    // print("Default platform ==> ${defaultTargetPlatform}");
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
       setState(() {
-        isAndroid = false;
+        isiOS = true;
       });
     }
   }
@@ -45,30 +45,27 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: isAndroid == true ? AppBar(
-      //   title: Text('Android'),
-      // ) : null,
+        appBar: isiOS == true
+            ? AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+              )
+            : null,
 
-      // appBar: AppBar(
-      //   // title: Text(
-      //   //   'Title',
-      //   //   style: TextStyle(color: Colors.black),
-      //   // ),
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0.0,
-      // ),
-      // extendBodyBehindAppBar: true,
-
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0.0,
+        // ),
+        extendBodyBehindAppBar: true,
         body: GoogleMap(
           initialCameraPosition: _kGoogle,
           mapType: MapType.normal,
           myLocationEnabled: true,
           compassEnabled: true,
-          onMapCreated: (GoogleMapController controller){
+          onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
           markers: Set<Marker>.from(_marker),
-        )
-    );
+        ));
   }
 }

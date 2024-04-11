@@ -5,10 +5,11 @@ import '../../helper/dimens.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Widget titleIcon;
+  final List<Widget>? actions;
 
   const AppBarWidget({
     super.key,
-    required this.titleIcon,
+    required this.titleIcon, this.actions,
   });
 
   @override
@@ -23,6 +24,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: titleIcon,
       centerTitle: true,
+      actions: actions,
     );
   }
 }

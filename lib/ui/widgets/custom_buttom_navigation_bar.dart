@@ -62,7 +62,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 alignment: Alignment.center,
                 height: kBottomNavigationBarHeight,
                 child: Image.asset(
-                  AppImages.contactIcon,
+                  AppImages.homeContactIcon,
                   height: iconMedium_3,
                   width: iconMedium_3,
                   color: widget.currentIndex == 1 ? Colors.white : context.appColors.colorPrimary,
@@ -81,7 +81,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 alignment: Alignment.center,
                 height: kBottomNavigationBarHeight,
                 child: Image.asset(
-                  AppImages.calculatorIcon,
+                  AppImages.homeCalculatorIcon,
                   height: iconMedium_3,
                   width: iconMedium_3,
                   color: widget.currentIndex == 2 ? Colors.white : context.appColors.colorPrimary,

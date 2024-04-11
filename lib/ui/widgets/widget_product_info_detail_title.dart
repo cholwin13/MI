@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 import 'package:test_pj_mi/helper/app_fonts.dart';
 
-class ProductInfoDetailTitle extends StatelessWidget {
+class ProductInfoDetailTitleWidget extends StatelessWidget {
   final String titleTxt;
 
-  const ProductInfoDetailTitle({super.key, required this.titleTxt});
+  const ProductInfoDetailTitleWidget({super.key, required this.titleTxt});
 
   @override
   Widget build(BuildContext context) {

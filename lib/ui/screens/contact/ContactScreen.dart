@@ -4,9 +4,9 @@ import '../../../helper/app_color.dart';
 import '../../../helper/app_images.dart';
 import '../../../helper/dimens.dart';
 import '../../widgets/app_bar_home.dart';
-import '../../widgets/widget_top_bar.dart';
+import '../../widgets/widget_slider.dart';
 import '../drawer/DrawerScreen.dart';
-import 'branches.dart';
+import 'branches_screen.dart';
 import 'contact_us.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -18,7 +18,6 @@ class ContactScreen extends StatefulWidget {
 
 class _ContactScreenState extends State<ContactScreen> {
   bool isLeftBtnSelected = true;
-  bool isRightBtnSelected = false;
 
   @override
   void didChangeDependencies() {
@@ -32,22 +31,6 @@ class _ContactScreenState extends State<ContactScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    Widget bodyWidget = const ContactUS();
-
-    if (isLeftBtnSelected) {
-      bodyWidget = const ContactUS();
-    } else {
-      bodyWidget = const Branches();
-    }
-
-    // Widget getBodyWidget(){
-    //   if (isLeftBtnSelected) {
-    //     return const ContactUS();
-    //   } else {
-    //     return const Branches();
-    //   }
-    // }
-
     return Scaffold(
       appBar: AppBarHome(
         titleIcon: Image.asset(
@@ -65,25 +48,17 @@ class _ContactScreenState extends State<ContactScreen> {
         ),
         child: Column(
           children: [
-            WidgetTopBar(
-              isLeftBtnSelected: isLeftBtnSelected,
-              isRightBtnSelected: isRightBtnSelected,
-              onLeftTap: () {
-                setState(() {
-                  isLeftBtnSelected = true;
-                  isRightBtnSelected = false;
-                });
-              },
-              onRightTap: () {
-                setState(() {
-                  isLeftBtnSelected = false;
-                  isRightBtnSelected = true;
-                });
-              },
+            SliderWidget(
               leftBtnTxt: 'contact_us',
               rightBtnTxt: 'branches',
+              isSelectLeft: isLeftBtnSelected,
+              onClick: (bool value) {
+                setState(() {
+                  isLeftBtnSelected = value;
+                });
+              },
             ),
-            Expanded(child: bodyWidget)
+            Expanded(child: isLeftBtnSelected ? const ContactUS() : const BranchesScreen())
           ],
         ),
       ),

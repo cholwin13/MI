@@ -170,7 +170,7 @@ class AppFontsStyle {
   TextStyle? buttonTextSmall() {
     return Theme.of(context).textTheme.headlineSmall?.copyWith(
       fontFamily: FontFamily.poppins.value,
-      fontSize: 14,
+      fontSize: 12,
     );
   }
 }

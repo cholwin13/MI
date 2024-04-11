@@ -43,6 +43,12 @@ const colorErrorDark = Color(0xFFF50000);
 const colorBtnOutlineLight = Color(0xFF000000);
 const colorBtnOutlineDark = Color(0xFF000000);
 
+const colorBtnGrayLight = Color(0xFFBDBDBD);
+const colorBtnGrayDark = Color(0xFFBDBDBD);
+
+const colorDatePickerLight = Color(0xFF208577);
+const colorDatePickerDark = Color(0xFF208577);
+
 class AppColors {
   Color colorPrimary;
   Color colorSecondary;
@@ -53,6 +59,8 @@ class AppColors {
   Color colorTextInputPlaceHolder;
   Color colorError;
   Color colorBtnOutline;
+  Color colorBtnGray;
+  Color colorDatePicker;
 
   AppColors(
       this.colorPrimary,
@@ -64,31 +72,37 @@ class AppColors {
       this.colorTextInputPlaceHolder,
       this.colorError,
       this.colorBtnOutline,
+      this.colorBtnGray,
+      this.colorDatePicker
       );
 }
 
 final _appColorLight = AppColors(
-  colorPrimaryLight,
-  colorSecondaryLight,
-  colorGoldLight,
-  colorWhiteLight,
-  colorGrayLight,
-  colorLabelLight,
-  colorTextInputPlaceHolderLight,
-  colorErrorLight,
-  colorBtnOutlineLight,
+    colorPrimaryLight,
+    colorSecondaryLight,
+    colorGoldLight,
+    colorWhiteLight,
+    colorGrayLight,
+    colorLabelLight,
+    colorTextInputPlaceHolderLight,
+    colorErrorLight,
+    colorBtnOutlineLight,
+    colorBtnGrayLight,
+    colorDatePickerLight
 );
 
 final _appColorDark = AppColors(
-  colorPrimaryDark,
-  colorSecondaryDark,
-  colorGoldDark,
-  colorWhiteDark,
-  colorGrayDark,
-  colorLabelDark,
-  colorTextInputPlaceHolderDark,
-  colorErrorDark,
-  colorBtnOutlineDark,
+    colorPrimaryDark,
+    colorSecondaryDark,
+    colorGoldDark,
+    colorWhiteDark,
+    colorGrayDark,
+    colorLabelDark,
+    colorTextInputPlaceHolderDark,
+    colorErrorDark,
+    colorBtnOutlineDark,
+    colorBtnGrayDark,
+    colorDatePickerDark
 );
 
 extension AppTheme on ThemeData {

@@ -84,6 +84,7 @@ class _MainWrapperState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: widget.navigationShell,
         bottomNavigationBar: CustomBottomNavigationBar(
             currentIndex: widget.navigationShell.currentIndex,

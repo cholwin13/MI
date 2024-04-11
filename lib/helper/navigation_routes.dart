@@ -12,6 +12,9 @@ import 'package:test_pj_mi/ui/screens/visionAndMission/vision_and_mission.dart';
 
 import '../ui/screens/aboutUs/about_us.dart';
 import '../ui/screens/contact/google_map_screen.dart';
+import '../ui/screens/contact/widget/branches_map.dart';
+import '../ui/screens/contact/widget/branches_modal.dart';
+import '../ui/screens/container_route.dart';
 import '../ui/screens/faqs/faqs.dart';
 import '../ui/screens/login/Login.dart';
 import '../ui/screens/settings/Settings.dart';
@@ -88,6 +91,10 @@ enum Routes {
       'singlePremiumEndowment', '/singlePremiumEndowment'),
   smartSavingPath('smartSaving', '/smartSaving'),
   seamanPlanPath('seamanPlan', '/seamanPlan'),
+
+  ///Container Route
+  containerRoutePath('containerRoute', '/containerRoute'),
+  branchesMapPath('branchesMap','/branchesMap'),
 
   /// Bottom Navigation Screens
   homePath("home", '/homePath'),
@@ -317,6 +324,41 @@ class CustomNavigationHelper {
                 pageBuilder: (context, state) {
                   return MaterialPage(
                     child: const PrintCertificate(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          ///Container Route
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.containerRoutePath.path,
+                pageBuilder: (context, state) {
+                  Widget? childWidget = state.extra as Widget?;
+
+                  childWidget ??= const ContainerRoute();
+
+                  return MaterialPage(
+                    child: childWidget,
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.branchesMapPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: BranchesMap(
+                      arguments: state.extra as BranchData,
+                    ),
                     key: state.pageKey,
                   );
                 },
