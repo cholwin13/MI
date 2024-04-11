@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "77366500035",
+    "project_id": "myanma-insurance",
+    "storage_bucket": "myanma-insurance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77366500035:android:745703e0dc2273220c6076",
+        "android_client_info": {
+          "package_name": "com.example.firebasefacebooktesting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_G0XOR0aLmoIcb95aiM5nt4eLSSVI3mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77366500035-6qlsk9e7t3orts9fctep4lhcmk4jndmc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.myanma.insurance"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77366500035:android:f20a2f2c89691e6b0c6076",
+        "android_client_info": {
+          "package_name": "com.myanmar_insurance_reactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_G0XOR0aLmoIcb95aiM5nt4eLSSVI3mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77366500035-6qlsk9e7t3orts9fctep4lhcmk4jndmc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.myanma.insurance"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77366500035:android:95a45effa49dcc4a0c6076",
+        "android_client_info": {
+          "package_name": "com.myanmar_insurance_reactnative.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_G0XOR0aLmoIcb95aiM5nt4eLSSVI3mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77366500035-6qlsk9e7t3orts9fctep4lhcmk4jndmc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.myanma.insurance"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77366500035:android:99c47085274c5e660c6076",
+        "android_client_info": {
+          "package_name": "com.myanmar_insurance_reactnative.prod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_G0XOR0aLmoIcb95aiM5nt4eLSSVI3mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77366500035-k3ehd27e58jkmg75vfci464s7aaf0nks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77366500035-6qlsk9e7t3orts9fctep4lhcmk4jndmc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.myanma.insurance"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
