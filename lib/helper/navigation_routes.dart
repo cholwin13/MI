@@ -15,6 +15,59 @@ import 'package:test_pj_mi/ui/screens/visionAndMission/vision_and_mission.dart';
 
 import '../routes/app_routes.dart';
 import '../ui/screens/aboutUs/about_us.dart';
+import '../ui/screens/buyOnline/air_travel/air_travel_buy_proposal_screen.dart';
+import '../ui/screens/buyOnline/air_travel/air_travel_proposal_screen.dart';
+import '../ui/screens/buyOnline/health/health_beneficiary_home_screen.dart';
+import '../ui/screens/buyOnline/health/health_beneficiary_info1_screen.dart';
+import '../ui/screens/buyOnline/health/health_beneficiary_info2_screen.dart';
+import '../ui/screens/buyOnline/health/health_beneficiary_info3_screen.dart';
+import '../ui/screens/buyOnline/health/health_buy_online_additional_cover_screen.dart';
+import '../ui/screens/buyOnline/health/health_confirm_screen.dart';
+import '../ui/screens/buyOnline/health/health_insure_person_info1_screen.dart';
+import '../ui/screens/buyOnline/health/health_insure_person_info2_screen.dart';
+import '../ui/screens/buyOnline/health/health_insure_person_info3_screen.dart';
+import '../ui/screens/buyOnline/health/health_survey_screen.dart';
+import '../ui/screens/buyOnline/inbound/enquiry_history_screen.dart';
+import '../ui/screens/buyOnline/inbound/enquiry_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_agent_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_beneficiary_info_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_hospital_network_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_insure_person_info_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_passport_info_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_payment_info_detail_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_premium_and_payment_screen.dart';
+import '../ui/screens/buyOnline/inbound/inbound_term_and_condition_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_agent_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_beneficiary_info_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_insure_info_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_passport_info_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_payment_info_details_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_premium_and_payment_screen.dart';
+import '../ui/screens/buyOnline/outboundMMK/outboundmmk_terms_and_condition_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_agent_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_beneficiary_info_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_insure_info_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_passport_info_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_payment_info_details_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_premium_and_payment_screen.dart';
+import '../ui/screens/buyOnline/outboundUSD/outbound_terms_and_conditions_screen.dart';
+import '../ui/screens/buyOnline/personal_accident/pa_confirm_screen.dart';
+import '../ui/screens/buyOnline/personal_accident/pa_insure_person_info1_screen.dart';
+import '../ui/screens/buyOnline/personal_accident/pa_insure_person_info2_screen.dart';
+import '../ui/screens/buyOnline/personal_accident/pa_insure_person_info3_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_agent_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_beneficiary_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_enquiry_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_insure_info_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_payment_info_details_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_premium_and_payment_screen.dart';
+import '../ui/screens/buyOnline/seaman/seaman_terms_and_conditions_screen.dart';
+import '../ui/screens/buyOnline/tpl_driver/driver_payment_info_details_screen.dart';
+import '../ui/screens/buyOnline/tpl_driver/driver_premium_and_payment_screen.dart';
+import '../ui/screens/buyOnline/travel/travel_buy_proposal_screen.dart';
+import '../ui/screens/buyOnline/travel/travel_proposal_screen.dart';
+import '../ui/screens/buyOnline/widget/country_code_screen.dart';
+import '../ui/screens/buyOnline/widget/country_screen.dart';
 import '../ui/screens/contact/google_map_screen.dart';
 import '../ui/screens/contact/widget/branches_map.dart';
 import '../ui/screens/contact/widget/branches_modal.dart';
@@ -661,6 +714,757 @@ class CustomNavigationHelper {
                 pageBuilder: (context, state) {
                   return MaterialPage(
                     child: const ShortTermPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Inbound
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundHospitalNetworkPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundHospitalNetworkScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundEnquiryPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: EnquiryScreen(screenName: state.extra as String),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.countryScreenPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const CountryScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.countryCodeScreenPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const CountryCodeScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundEnquiryHistoryPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: EnquiryHistoryScreen(screenName: state.extra as String),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundTermsAndConditionPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundTermsAndConditionScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundPassportInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundPassportInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundInsurePersonPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundInsurePersonInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundBeneficiaryPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundBeneficiaryScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundAgentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundAgentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundPremiumAndPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundPremiumAndPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.inboundPaymentInfoDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const InboundPaymentInfoDetailsScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Outbound
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKTermsAndConditionPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKTermsAndConditionScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKPassportInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKPassportInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKInsurePersonPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKInsurePersonInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKBeneficiaryInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKBeneficiaryInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKAgentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKAgentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKPremiumAndPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKPremiumAndPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundMMKPaymentInfoDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundMMKPaymentInfoDetailsScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Outbound USD
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundTermsAndConditionsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundTermsAndConditions(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundPassportInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundPassportInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundInsureInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundInsureInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundBeneficiaryInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundBeneficiaryScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundAgentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundAgentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundPremiumAndPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundPremiumAndPayment(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.outboundPaymentInfoDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const OutboundPaymentInfoDetailsScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Seaman Buy Online
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanTermsAndConditionsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanTermsAndConditionsScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanEnquiryPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanEnquiryScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanInsureInfoPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanInsureInfoScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanBeneficiaryPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanBeneficiaryScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanAgentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanAgentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanPremiumAndPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanPremiumAndPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.seamanPaymentInfoDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const SeamanPaymentInfoDetailsScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Air Travel Insurance
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.airTravelProposalPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: AirTravelProposalScreen(id: state.extra as int,),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.airTravelBuyProposalPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: AirTravelBuyProposalScreen(id: state.extra as int,),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Travel Insurance
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.travelProposalPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: TravelProposalScreen(id: state.extra as int,),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.travelBuyProposalPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: TravelBuyProposalScreen(id: state.extra as int,),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Health Insurance
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthInsurePersonInfo1Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthInsurePersonInfo1Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthInsurePersonInfo2Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthInsurePersonInfo2Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthInsurePersonInfo3Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthInsurePersonOInfo3Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthBuyOnlineAdditionalCoverPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthBuyOnlineAdditionalCoverBuyOnlineScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthSurveyPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthSurveyScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthBeneficiaryHomePath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthBeneficiaryHomeScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthBeneficiaryInfo1Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthBeneficiaryInfo1Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthBeneficiaryInfo2Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthBeneficiaryInfo2Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthBeneficiaryInfo3Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthBeneficiaryInfo3Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.healthConfirmPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const HealthConfirmScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Personal Accident
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.paInsurePersonInfo1Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const PAInsurePersonInfo1Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.paInsurePersonInfo2Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const PAInsurePersonInfo2Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.paInsurePersonInfo3Path.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const PAInsurePersonInfo3Screen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.paConfirmPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const PAConfirmScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /// Driver
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tplDriverPremiumAndPaymentPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const TplDriverPremiumAndPaymentScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tplDriverPaymentInfoDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const TplDriverPaymentInfoDetailsScreen(),
                     key: state.pageKey,
                   );
                 },
