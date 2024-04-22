@@ -2,10 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'helper/languages.dart';
 import 'helper/navigation_routes.dart';
+import 'network/data_agents/dio_data_agent_impl.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  // HttpDataAgentImpl().getTPLPrintCertificate('9F/9867');
+  DioDataAgentImpl().getTPLPrintCertificate('9F/9867');
 
   runApp(EasyLocalization(
     supportedLocales: Languages.values.map((e) => e.locale).toList(),
