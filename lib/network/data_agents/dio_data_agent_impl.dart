@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:test_pj_mi/network/data_agents/data_agents.dart';
 
 import '../api_constants.dart';
 
-class DioDataAgentImpl {
+class DioDataAgentImpl extends DataAgent {
+  @override
   void getTPLPrintCertificate(String vehicleNo) {
     Map<String, String> queryParameters = { PARAM_VEHICLE_NO: vehicleNo};
 
