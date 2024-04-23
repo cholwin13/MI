@@ -11,10 +11,10 @@ void main() async{
   await EasyLocalization.ensureInitialized();
 
   // DataAgent dataAgent = HttpDataAgentImpl();
-  DataAgent dataAgent = DioDataAgentImpl();
+  // DataAgent dataAgent = DioDataAgentImpl();
 
   // dataAgent.getTPLPrintCertificate('9F/9867');
-  dataAgent.getTPLPrintCertificate('9F/9867');
+  // dataAgent.getTPLPrintCertificate('9F/9867');
 
   runApp(EasyLocalization(
     supportedLocales: Languages.values.map((e) => e.locale).toList(),
