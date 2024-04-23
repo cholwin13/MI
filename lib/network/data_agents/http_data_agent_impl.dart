@@ -8,9 +8,9 @@ class HttpDataAgentImpl extends DataAgent {
   @override
   void getTPLPrintCertificate(String vehicleNo){
 
-    Map<String, String> queryParameters = { PARAM_VEHICLE_NO: vehicleNo };
+    Map<String, String> queryParameters = { paramVehicleNo: vehicleNo };
 
-    var url = Uri.https(BASE_URL_HTTP, ENDPOINT_GET_TPL_PRINT_CERTIFICATE, queryParameters);
+    var url = Uri.https(BASE_URL_HTTP, endPointGetPrintCertificate, queryParameters);
 
     print('URL is ${url}');
 
