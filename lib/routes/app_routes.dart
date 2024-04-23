@@ -199,6 +199,9 @@ enum Routes {
   tplDriverPremiumAndPaymentPath('tplDriverPremiumAndPayment', '/tplDriverPremiumAndPayment'),
   tplDriverPaymentInfoDetailsPath('tplDriverPaymentInfoDetails', '/tplDriverPaymentInfoDetails'),
 
+  /// Print Certificate For TPL
+  tplPrintCertificateHistoryPath('tplPrintCertificateHistory', '/tplPrintCertificateHistory'),
+
   /// Bottom Navigation Screens
   homePath("home", '/homePath'),
   calculatorPath('calculator', '/calculatorPath');

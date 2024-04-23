@@ -10,7 +10,8 @@ import 'package:test_pj_mi/ui/screens/login/enter_code_screen.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_invoice_no.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_details_screen.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_screen.dart';
-import 'package:test_pj_mi/ui/screens/printCertificate/print_certificate.dart';
+import 'package:test_pj_mi/ui/screens/printCertificate/print_certificate_home.dart';
+import 'package:test_pj_mi/ui/screens/printCertificate/tpl_print_certificate_history_screen.dart';
 import 'package:test_pj_mi/ui/screens/visionAndMission/vision_and_mission.dart';
 
 import '../routes/app_routes.dart';
@@ -1465,6 +1466,20 @@ class CustomNavigationHelper {
                 pageBuilder: (context, state) {
                   return MaterialPage(
                     child: const TplDriverPaymentInfoDetailsScreen(),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tplPrintCertificateHistoryPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: const TPLPrintCertificateHistoryScreen(),
                     key: state.pageKey,
                   );
                 },

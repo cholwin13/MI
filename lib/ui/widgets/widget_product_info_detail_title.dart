@@ -5,13 +5,14 @@ import 'package:test_pj_mi/helper/app_fonts.dart';
 
 class ProductInfoDetailTitleWidget extends StatelessWidget {
   final String titleTxt;
+  final bool isLocalized;
 
-  const ProductInfoDetailTitleWidget({super.key, required this.titleTxt});
+  const ProductInfoDetailTitleWidget({super.key, required this.titleTxt, this.isLocalized = true,});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(titleTxt.tr(),
+      child: Text(isLocalized ? titleTxt.tr() : titleTxt,
           style: context.appFonts.bodySmall()?.copyWith(
             fontSize: 14.0,
             fontWeight: FontWeight.w600,

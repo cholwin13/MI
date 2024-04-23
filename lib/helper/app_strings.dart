@@ -1195,5 +1195,10 @@ class AppStrings {
   static const sharePercentage = "Share Percentage";
   static const contactInfo = "Contact Info";
   static const authorizedAgent = "AUTHORIZED ASSOCIATION";
+
+  static const printCertificateForTpl = "Print certificates For Third Party Liability Insurance";
+  static const printCertificateForTplCapital = "PRINT CERTIFICATES FOR THIRD PARTY LIABILITY INSURANCE";
+  static const vehicleNo = "Vehicle Number / ယာဥ်အမှတ်";
+  static const premiumHistory = "PREMIUM HISTORY";
 }
 
