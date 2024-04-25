@@ -21,14 +21,14 @@ class _APIServices implements APIServices {
   String? baseUrl;
 
   @override
-  Future<TPLPrintCertificateResponse?> getTPLPrintCertificate(
+  Future<HttpResponse<TPLPrintCertificateResponse>> getTPLPrintCertificate(
       String vehicleNo) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'vehicle_no': vehicleNo};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>?>(
-        _setStreamType<TPLPrintCertificateResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<TPLPrintCertificateResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -44,10 +44,9 @@ class _APIServices implements APIServices {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = _result.data == null
-        ? null
-        : TPLPrintCertificateResponse.fromJson(_result.data!);
-    return value;
+    final value = TPLPrintCertificateResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

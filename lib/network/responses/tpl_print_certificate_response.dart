@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../data/vos/tpl_print_certificate_vo.dart';
+import '../../data/vos/tpl_print_certificate/tpl_print_certificate_vo.dart';
 
 part 'tpl_print_certificate_response.g.dart';
 

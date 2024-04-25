@@ -1,7 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
+import 'package:test_pj_mi/injector.dart';
+import 'package:test_pj_mi/network/api_services.dart';
+import 'package:test_pj_mi/network/data_agents/retrofit_data_agent_impl.dart';
 
+import '../../../core/data_state.dart';
 import '../../../helper/app_images.dart';
 import '../../../helper/app_strings.dart';
 import '../../../helper/dimens.dart';
@@ -37,6 +41,24 @@ class _TPLPrintCertificateScreenState extends State<TPLPrintCertificateScreen> {
     } else {
       return null;
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    final RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
+    test.getTPLPrintCertificate("9F/9867").then((dataState) {
+      if(dataState is DataSuccess) {
+        print("success -..");
+        print(dataState.data?.toJson().toString());
+      }else if (dataState is DataError){
+        print("Error -....");
+        print(dataState.error);
+      }
+    });
+    // test.getTPLPrintCertificate("9F/9867");
   }
 
   @override

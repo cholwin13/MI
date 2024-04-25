@@ -121,7 +121,7 @@ class CustomNavigationHelper {
   static final GoRouter router = GoRouter(
     initialLocation: initR,
     navigatorKey: _rootNavigatorKey,
-    debugLogDiagnostics: true,
+    // debugLogDiagnostics: true,
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

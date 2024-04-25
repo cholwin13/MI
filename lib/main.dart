@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:test_pj_mi/injector.dart';
 import 'package:test_pj_mi/network/data_agents/data_agents.dart';
 import 'package:test_pj_mi/network/data_agents/http_data_agent_impl.dart';
 import 'helper/languages.dart';
@@ -9,6 +10,7 @@ import 'network/data_agents/dio_data_agent_impl.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  locator();
 
   // DataAgent dataAgent = HttpDataAgentImpl();
   // DataAgent dataAgent = DioDataAgentImpl();
