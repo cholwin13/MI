@@ -1,10 +1,9 @@
 /// Base URL
-// const String BASE_URL_HTTP = "37.111.50.42:8484";
-// const String BASE_URL_DIO = "http://37.111.50.42:8484";
-const String BASE_URL_UAT = "http://37.111.50.42:8484";
+const String baseUrl= "http://37.111.50.42:8484";
 
 /// End Points
-const String endPointGetPrintCertificate = "/miwsp/ws/recordsHistory";
+const String endPointGetPrintCertificateForTpl = "/miwsp/ws/recordsHistory";
+const String endPointSeamanLifePlan = "/milifeapi/ws/getLifeProductPremium";
 
 /// Header
 const String headerAccept = "Accept";
@@ -15,4 +14,4 @@ const Map<String,String> header={
 };
 
 /// Parameters
-const String paramVehicleNo = "vehicle_no";
+const String paramVehicleNoForPrintCertificateTpl = "vehicle_no";

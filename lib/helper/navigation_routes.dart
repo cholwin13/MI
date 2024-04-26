@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:test_pj_mi/data/vos/tpl_print_certificate/tpl_print_certificate_vo.dart';
 import 'package:test_pj_mi/ui/screens/MainScreen.dart';
 import 'package:test_pj_mi/ui/screens/buyOnline/buy_online.dart';
 import 'package:test_pj_mi/ui/screens/contact/ContactScreen.dart';
@@ -1479,7 +1480,7 @@ class CustomNavigationHelper {
                 path: Routes.tplPrintCertificateHistoryPath.path,
                 pageBuilder: (context, state) {
                   return MaterialPage(
-                    child: const TPLPrintCertificateHistoryScreen(),
+                    child: TPLPrintCertificateHistoryScreen(purchaseHistoryList: state.extra as List<TPLPrintCertificateVO>,),
                     key: state.pageKey,
                   );
                 },

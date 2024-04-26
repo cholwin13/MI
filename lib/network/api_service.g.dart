@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_services.dart';
+part of 'api_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'api_services.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _APIServices implements APIServices {
-  _APIServices(
+class _ApiService implements ApiService {
+  _ApiService(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,7 +21,7 @@ class _APIServices implements APIServices {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<TPLPrintCertificateResponse>> getTPLPrintCertificate(
+  Future<HttpResponse<TPLPrintCertificateResponse>> getRecordHistory(
       String vehicleNo) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'vehicle_no': vehicleNo};

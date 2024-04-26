@@ -1,13 +1,17 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_pj_mi/bloc/tpl_print_certificate/tpl_print_certificate_bloc.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
+import 'package:test_pj_mi/helper/app_fonts.dart';
 import 'package:test_pj_mi/injector.dart';
-import 'package:test_pj_mi/network/api_services.dart';
+import 'package:test_pj_mi/network/api_service.dart';
 import 'package:test_pj_mi/network/data_agents/retrofit_data_agent_impl.dart';
 
 import '../../../core/data_state.dart';
+import '../../../data/vos/tpl_print_certificate/tpl_print_certificate_vo.dart';
 import '../../../helper/app_images.dart';
 import '../../../helper/app_strings.dart';
 import '../../../helper/dimens.dart';
@@ -16,6 +20,7 @@ import '../../../routes/app_routes.dart';
 import '../../widgets/app_bar_widget.dart';
 import '../../widgets/widget_label_txt_form_field.dart';
 import '../../widgets/widget_next_btn.dart';
+import '../../widgets/widget_notice_alert_box.dart';
 import '../../widgets/widget_product_info_detail_title.dart';
 import '../../widgets/widgte_custom_text_form_field.dart';
 
@@ -51,17 +56,16 @@ class _TPLPrintCertificateScreenState extends State<TPLPrintCertificateScreen> {
     // TODO: implement initState
     super.initState();
 
-    final RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
-    test.getTPLPrintCertificate("9F/9867").then((dataState) {
-      if (dataState is DataSuccess) {
-        print("success -..");
-        print(dataState.data?.toJson().toString());
-      } else if (dataState is DataError) {
-        print("Error -....");
-        print(dataState.error);
-      }
-    });
-    // test.getTPLPrintCertificate("9F/9867");
+    // RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
+    // test.getRecordHistory("9F/9867").then((dataState) {
+    //   if (dataState is DataSuccess) {
+    //     print("success -..");
+    //     print(dataState.data?.toJson().toString());
+    //   } else if (dataState is DataError) {
+    //     print("Error -....");
+    //     print(dataState.error);
+    //   }
+    // });
   }
 
   @override
@@ -99,10 +103,10 @@ class _TPLPrintCertificateScreenState extends State<TPLPrintCertificateScreen> {
                     height: kMarginMedium_2,
                   ),
                   CustomTextFormFieldWidget(
-                    // onChanged: handleVehicleNoChanged,
-                    onChanged: (val){
-                      BlocProvider.of<TplPrintCertificateBloc>(context).add(VehicleNoChangedEvent(val));
-                    },
+                    onChanged: handleVehicleNoChanged,
+                    // onChanged: (val){
+                    //   BlocProvider.of<TplPrintCertificateBloc>(context).add(VehicleNoChangedEvent(val));
+                    // },
                     hintTxt: '9F/9867',
                     textController: vehicleNoController,
                     validator: validateVehicleNo,
@@ -118,6 +122,26 @@ class _TPLPrintCertificateScreenState extends State<TPLPrintCertificateScreen> {
                         final isValid = formKey.currentState?.validate();
 
                         if (isValid!) {
+                          RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
+                          test.getRecordHistory(vehicleNo).then((dataState) {
+                            if (dataState is DataSuccess) {
+                              // print("success -..");
+                              List<TPLPrintCertificateVO> decodedData = (dataState.data?.data ?? []);
+                              // print(jsonEncode(dataState.data?.data));
+                              if(dataState.data?.data != null && dataState.data!.data!.isEmpty){
+                                _showDialog(context);
+                              }else{
+                                CustomNavigationHelper.router.push(
+                                  Routes.tplPrintCertificateHistoryPath.path,
+                                  extra: decodedData
+                                );
+                              }
+                            } else if (dataState is DataError) {
+                              print("Error -....");
+                              print(dataState.error);
+                            }
+                          });
+
                           // CustomNavigationHelper.router.push(
                           //   Routes.tplPrintCertificateHistoryPath.path,
                           // );
@@ -133,4 +157,20 @@ class _TPLPrintCertificateScreenState extends State<TPLPrintCertificateScreen> {
       },
     );
   }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => NoticeAlertBoxWidget(
+          titleTxt: Text('Alert',
+            style: context.appFonts
+                .bodySmall()
+                ?.copyWith(fontSize: textRegular, fontWeight: FontWeight.bold),),
+          contentTxt: Text('No Record List yet.',
+              style:
+              context.appFonts.bodySmall()?.copyWith(fontSize: textRegular)),
+        )
+    );
+  }
+
 }

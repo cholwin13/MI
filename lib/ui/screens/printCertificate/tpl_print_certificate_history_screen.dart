@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:test_pj_mi/data/vos/tpl_print_certificate/tpl_print_certificate_vo.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 import 'package:test_pj_mi/helper/app_fonts.dart';
 
@@ -10,20 +13,22 @@ import '../../widgets/widget_product_info_detail_title.dart';
 import '../lifeInsurance/widget/widget_two_column_txt.dart';
 
 class TPLPrintCertificateHistoryScreen extends StatefulWidget {
-  const TPLPrintCertificateHistoryScreen({super.key});
+  final List<TPLPrintCertificateVO> purchaseHistoryList;
+  const TPLPrintCertificateHistoryScreen({super.key, required this.purchaseHistoryList});
 
   @override
   State<TPLPrintCertificateHistoryScreen> createState() => _TPLPrintCertificateHistoryScreenState();
 }
 
 class _TPLPrintCertificateHistoryScreenState extends State<TPLPrintCertificateHistoryScreen> {
-  final List<Map<String, dynamic>> purchaseHistoryList = [
-    {"periodFrom": '2011-11-01', "periodTo": '2011-11-01'},
-    {"periodFrom": '2011-11-01', "periodTo": '2011-11-01'},
-  ];
+  // final List<Map<String, dynamic>> historyList = [
+  //   {"periodFrom": '2011-11-01', "periodTo": '2011-11-01'},
+  //   {"periodFrom": '2011-11-01', "periodTo": '2011-11-01'},
+  // ];
 
   @override
   Widget build(BuildContext context) {
+    print('List is ${jsonEncode(widget.purchaseHistoryList)}');
     return Scaffold(
       appBar: AppBarWidget(
         titleIcon: Image.asset(
@@ -48,9 +53,9 @@ class _TPLPrintCertificateHistoryScreenState extends State<TPLPrintCertificateHi
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: purchaseHistoryList.length,
+                itemCount: widget.purchaseHistoryList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final purchase = purchaseHistoryList[index];
+                  final purchase = widget.purchaseHistoryList[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: kMarginLarge),
                     child: Container(
@@ -74,14 +79,16 @@ class _TPLPrintCertificateHistoryScreenState extends State<TPLPrintCertificateHi
                           ),
                           TwoColumnTextWidget(
                             txt1: 'Period From',
-                            txt2: purchase['periodFrom'] ?? '',
+                            // txt2: purchase['periodFrom'] ?? '',
+                            txt2: purchase.periodFrom ?? '',
                             textColor: context.appColors.colorPrimary,
                             lftFontWeight: FontWeight.w700,
                             fontSize: textRegular,
                           ),
                           TwoColumnTextWidget(
                             txt1: 'Period To',
-                            txt2: purchase['periodTo'] ?? '',
+                            // txt2: purchase['periodTo'] ?? '',
+                            txt2: purchase.periodTo ?? '',
                             textColor: context.appColors.colorPrimary,
                             lftFontWeight: FontWeight.w700,
                             fontSize: textRegular,
