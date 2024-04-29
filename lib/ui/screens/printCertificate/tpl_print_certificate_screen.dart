@@ -137,7 +137,7 @@ class _TPLPrintCertificateScreenState extends State<TPLPrintCertificateScreen> {
                                 );
                               }
                             } else if (dataState is DataError) {
-                              print("Error -....");
+                              // print("Error -....");
                               print(dataState.error);
                             }
                           });

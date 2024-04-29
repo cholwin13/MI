@@ -14,6 +14,7 @@ import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_sc
 import 'package:test_pj_mi/ui/screens/printCertificate/print_certificate_home.dart';
 import 'package:test_pj_mi/ui/screens/printCertificate/tpl_print_certificate_history_screen.dart';
 import 'package:test_pj_mi/ui/screens/visionAndMission/vision_and_mission.dart';
+import 'package:test_pj_mi/ui/widgets/widget_choose_coverage_type.dart';
 
 import '../routes/app_routes.dart';
 import '../ui/screens/aboutUs/about_us.dart';
@@ -97,6 +98,7 @@ import '../ui/screens/premiumCalculator/lifeInsurance/shore_job/shore_job_paymen
 import '../ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/short_term_payment_screen.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/widget/life_premium_details_screen.dart';
 import '../ui/screens/settings/Settings.dart';
+import '../ui/widgets/coverage_type_picker.dart';
 import '../ui/widgets/coverage_type_picker_list.dart';
 import '../ui/widgets/premium_details_arguments_list.dart';
 import '../ui/widgets/widget_coverage_type_picker.dart';
@@ -579,6 +581,22 @@ class CustomNavigationHelper {
                   return MaterialPage(
                     child: CoverageTypePickerWidget(
                       arguments: state.extra as CoverageTypePickerList,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.chooseCoverageTypePickerPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: WidgetChooseCoverageTypePicker(
+                      arguments: state.extra as CoverageTypePicker,
                     ),
                     key: state.pageKey,
                   );

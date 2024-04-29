@@ -49,7 +49,10 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
             const SizedBox(
               height: kMarginCardMedium_2,
             ),
-            const PremiumDetailTxt(title: 'life_premium_details_title', image: AppImages.additionalRiskCover,),
+            const PremiumDetailTxt(
+              title: 'life_premium_details_title',
+              image: AppImages.additionalRiskCover,
+            ),
             const SizedBox(
               height: kMarginCardMedium_2,
             ),
@@ -58,8 +61,8 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: kMarginSmall),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: kMarginSmall),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       border: Border.all(color: context.appColors.colorPrimary),
@@ -68,7 +71,9 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                     child: Column(
                       children: [
                         PremiumAndTypesWidget(
-                          premiumTxt: totalLossReturn.toStringAsFixed(2),
+                          // premiumTxt: totalLossReturn.toStringAsFixed(2),
+                          premiumTxt:
+                              widget.arguments.amount!.toStringAsFixed(2),
                           typesTxt: 'kyarfishing_sum_insure'.tr(),
                           isMMK: widget.arguments.isMMK,
                         ),
@@ -85,11 +90,29 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Flexible(
-                                  child: NormalTxtWidget(txt: 'sth premium', fontColor: context.appColors.colorPrimary,)),
-                              NormalTxtWidget(
-                                  txt:
-                                      '${100.0.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}', fontColor: context.appColors.colorPrimary,)
+                              widget.arguments.responseData != null
+                                  ? Flexible(
+                                      child: NormalTxtWidget(
+                                      txt: widget
+                                          .arguments.responseData![0].name,
+                                      fontColor: context.appColors.colorPrimary,
+                                    ))
+                                  : Flexible(
+                                      child: NormalTxtWidget(
+                                      txt: 'sth premium',
+                                      fontColor: context.appColors.colorPrimary,
+                                    )),
+                              widget.arguments.responseData != null
+                                  ? NormalTxtWidget(
+                                      txt:
+                                          '${widget.arguments.responseData![0].premium.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                      fontColor: context.appColors.colorPrimary,
+                                    )
+                                  : NormalTxtWidget(
+                                      txt:
+                                          '${100.0.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                      fontColor: context.appColors.colorPrimary,
+                                    )
                             ],
                           ),
                         ),
@@ -104,10 +127,23 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
-                                    child: NormalTxtWidget(txt: 'Stamp Fees', fontColor: context.appColors.colorPrimary,)),
-                                NormalTxtWidget(
-                                    txt:
-                                        '${10.00} ${widget.arguments.isMMK ? 'MMK' : 'USD'}', fontColor: context.appColors.colorPrimary,)
+                                    child: NormalTxtWidget(
+                                  txt: 'Stamp Fees',
+                                  fontColor: context.appColors.colorPrimary,
+                                )),
+                                widget.arguments.responseData != null
+                                    ? NormalTxtWidget(
+                                        txt:
+                                            '${widget.arguments.responseData![0].premium} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                        fontColor:
+                                            context.appColors.colorPrimary,
+                                      )
+                                    : NormalTxtWidget(
+                                        txt:
+                                            '${10.00} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                        fontColor:
+                                            context.appColors.colorPrimary,
+                                      )
                               ],
                             ),
                           ),
@@ -115,7 +151,8 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                           color: context.appColors.colorPrimary,
                         ),
                         PremiumAndTypesWidget(
-                          premiumTxt: totalPremium.toStringAsFixed(2),
+                          // premiumTxt: totalPremium.toStringAsFixed(2),
+                          premiumTxt: widget.arguments.responseData != null ? widget.arguments.responseData![0].premium.toStringAsFixed(2) : totalPremium.toStringAsFixed(2),
                           typesTxt: 'life_total_payment'.tr(),
                           isMMK: widget.arguments.isMMK,
                         ),
@@ -127,12 +164,21 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                   ),
                   if (widget.arguments.isStampFee == true)
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: kMarginCardMedium, horizontal: kMarginMedium),
-                      child: NormalTxtWidget(txt: 'stamp_fee_details'.tr(), fontColor: context.appColors.colorError,),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: kMarginCardMedium,
+                          horizontal: kMarginMedium),
+                      child: NormalTxtWidget(
+                        txt: 'stamp_fee_details'.tr(),
+                        fontColor: context.appColors.colorError,
+                      ),
                     ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: kMarginMedium, horizontal: kMarginSmall_3),
-                    child: NormalTxtWidget(txt: 'disclaimer'.tr(), fontColor: context.appColors.colorLabel,),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: kMarginMedium, horizontal: kMarginSmall_3),
+                    child: NormalTxtWidget(
+                      txt: 'disclaimer'.tr(),
+                      fontColor: context.appColors.colorLabel,
+                    ),
                   ),
                 ],
               ),
@@ -172,7 +218,7 @@ class DetailsTxtWidget extends StatelessWidget {
               child: NormalTxtWidget(
             txt: 'life_details_title'.tr(),
             fontWeight: FontWeight.bold,
-                fontColor: context.appColors.colorPrimary,
+            fontColor: context.appColors.colorPrimary,
           )),
           NormalTxtWidget(
             txt: isMMK ? AppStrings.premiumMMK : AppStrings.premiumUSD,
@@ -210,11 +256,17 @@ class PremiumAndTypesWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(child: NormalTxtWidget(txt: typesTxt, fontColor: context.appColors.colorPrimary,)),
-          NormalTxtWidget(txt: '$premiumTxt ${isMMK ? 'MMK' : 'USD'} ', fontColor: context.appColors.colorPrimary,)
+          Flexible(
+              child: NormalTxtWidget(
+            txt: typesTxt,
+            fontColor: context.appColors.colorPrimary,
+          )),
+          NormalTxtWidget(
+            txt: '$premiumTxt ${isMMK ? 'MMK' : 'USD'} ',
+            fontColor: context.appColors.colorPrimary,
+          )
         ],
       ),
     );
   }
 }
-
