@@ -24,8 +24,18 @@ class LifePremiumDetailsScreen extends StatefulWidget {
 }
 
 class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
-  double totalLossReturn = 100.00;
-  double totalPremium = 1000.00;
+  double totalLossReturn = 10.00;
+  double totalPremium = 10.00;
+  late double premiumAmount;
+  late double sumInsure;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    premiumAmount = widget.arguments.sumInsure != null ? widget.arguments.sumInsure!.toDouble() : totalLossReturn;
+    sumInsure = widget.arguments.sumInsure != null ? (widget.arguments.sumInsure!.toDouble() * 30 / 100000) : totalLossReturn;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +81,7 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                     child: Column(
                       children: [
                         PremiumAndTypesWidget(
-                          // premiumTxt: totalLossReturn.toStringAsFixed(2),
-                          premiumTxt:
-                              widget.arguments.amount!.toStringAsFixed(2),
+                          premiumTxt: premiumAmount.toStringAsFixed(2),
                           typesTxt: 'kyarfishing_sum_insure'.tr(),
                           isMMK: widget.arguments.isMMK,
                         ),
@@ -110,7 +118,7 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                                     )
                                   : NormalTxtWidget(
                                       txt:
-                                          '${100.0.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                          '${10.0.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
                                       fontColor: context.appColors.colorPrimary,
                                     )
                             ],
@@ -134,13 +142,13 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                                 widget.arguments.responseData != null
                                     ? NormalTxtWidget(
                                         txt:
-                                            '${widget.arguments.responseData![0].premium} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                            '${sumInsure} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
                                         fontColor:
                                             context.appColors.colorPrimary,
                                       )
                                     : NormalTxtWidget(
                                         txt:
-                                            '${10.00} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                            '${0.00} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
                                         fontColor:
                                             context.appColors.colorPrimary,
                                       )
@@ -150,6 +158,12 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                         Divider(
                           color: context.appColors.colorPrimary,
                         ),
+                        if (widget.arguments.isStampFee == true)
+                          PremiumAndTypesWidget(
+                            premiumTxt: widget.arguments.responseData != null ? widget.arguments.responseData![0].premium.toStringAsFixed(2) : totalPremium.toStringAsFixed(2),
+                            typesTxt: 'life_total_payment'.tr(),
+                            isMMK: widget.arguments.isMMK,
+                          ),
                         PremiumAndTypesWidget(
                           // premiumTxt: totalPremium.toStringAsFixed(2),
                           premiumTxt: widget.arguments.responseData != null ? widget.arguments.responseData![0].premium.toStringAsFixed(2) : totalPremium.toStringAsFixed(2),

@@ -7,7 +7,6 @@ import 'package:test_pj_mi/injector.dart';
 import 'package:test_pj_mi/network/data_agents/data_agents.dart';
 import 'package:test_pj_mi/network/data_agents/http_data_agent_impl.dart';
 import 'core/data_state.dart';
-import 'data/vos/seaman_plan/seaman_plan_request.dart';
 import 'helper/languages.dart';
 import 'helper/navigation_routes.dart';
 import 'network/api_service.dart';

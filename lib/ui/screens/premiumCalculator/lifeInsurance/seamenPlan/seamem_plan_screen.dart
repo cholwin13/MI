@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:test_pj_mi/core/data_state.dart';
-import 'package:test_pj_mi/data/vos/seaman_plan/seaman_plan_request.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 
+import '../../../../../data/vos/life/seaman_plan/seaman_plan_request.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
@@ -214,7 +214,6 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
             age = ageController.text;
             final selectedPlan = planList.firstWhere((item) => item['value'] == planReceivedData);
             final insureAmount = selectedPlan["insureAmt"];
-            print("Insure Amount $insureAmount");
 
             if(planReceivedData != null){
               RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
@@ -240,7 +239,7 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
                             isMMK: true,
                             appBarIcon: AppImages.lifeSeamanIcon,
                           responseData: data,
-                          amount: insureAmount
+                          sumInsure: insureAmount
                         ));
                   } else {
                     print('Fail');

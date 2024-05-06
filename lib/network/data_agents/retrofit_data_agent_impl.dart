@@ -59,11 +59,11 @@
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/dio.dart';
-import 'package:test_pj_mi/data/vos/seaman_plan/seaman_plan_request.dart';
 import 'package:test_pj_mi/network/responses/life_product_premium_response/life_product_premium_response.dart';
 import 'package:test_pj_mi/network/responses/tpl_print_certificate_response.dart';
 
 import '../../core/data_state.dart';
+import '../../data/vos/life/seaman_plan/seaman_plan_request.dart';
 import '../api_service.dart';
 import 'data_agents.dart';
 

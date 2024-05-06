@@ -3,7 +3,7 @@ const String baseUrlUAT= "http://37.111.50.42:8484";
 
 /// End Points
 const String endPointGetPrintCertificateForTpl = "/miwsp/ws/recordsHistory";
-const String endPointSeamanLifePlan = "/milifeapi/ws/getLifeProductPremium";
+const String endPointLifePremiumCalculator = "/milifeapi/ws/getLifeProductPremium";
 
 /// Header
 const String headerAccept = "Accept";
