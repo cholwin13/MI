@@ -1,12 +1,18 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 
+import '../../../../../core/data_state.dart';
+import '../../../../../data/vos/life/life_pc_payment_request/life_pc_payment_request.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
 import '../../../../../helper/navigation_routes.dart';
+import '../../../../../injector.dart';
+import '../../../../../network/data_agents/retrofit_data_agent_impl.dart';
+import '../../../../../network/responses/life_product_premium_response/life_product_premium_response.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../widgets/app_bar_widget.dart';
 import '../../../../widgets/widget_date_picker_text_form_field.dart';
@@ -55,6 +61,37 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
     }else {
       return null;
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
+    test.getLifePaymentProductPremium(
+        LifePCPaymentRequest(
+            "ISPRD003001000009589529032019",
+            50000,
+            "ISSYS0090001000000000229032013", // payment type
+            {
+              "ISSYS0130001000000000829032013":"7", // term
+              "ISSYS013001000000030730062015":"10" // age
+            }
+        )
+    ).then((dataState) {
+      if (dataState is DataSuccess) {
+        if (dataState.data != null) {
+          List<LifeProductPremiumResponse> responseData = dataState.data as List<LifeProductPremiumResponse>;
+          print("success -..");
+          print(jsonEncode(responseData));
+        } else {
+          print('Fail');
+        }
+      } else if (dataState is DataError) {
+        print("Error -....");
+        print(dataState.error);
+      }
+    });
   }
 
   @override
@@ -139,11 +176,6 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
           final isValid = formKey.currentState?.validate();
           if (isValid!) {
             CustomNavigationHelper.router.push(
-              // Routes.lifePremiumDetailsPath.path,
-              // extra: PremiumDetailsArguments(
-              //     title: 'government_short_term_insurance',
-              //     isMMK: true,
-              //     appBarIcon: AppImages.lifeGovPersonalShortTermIcon),
                 Routes.lifeShortTermPaymentPath.path
             );
           }

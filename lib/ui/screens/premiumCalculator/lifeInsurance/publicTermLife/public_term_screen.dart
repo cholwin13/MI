@@ -4,7 +4,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 
 import '../../../../../core/data_state.dart';
-import '../../../../../data/vos/life/seaman_plan/seaman_plan_request.dart';
+import '../../../../../data/vos/life/life_pc_request/life_pc_request.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
@@ -160,7 +160,7 @@ class _PublicTermLifePCScreenState extends State<PublicTermLifePCScreen> {
 
             RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
             test
-                .getLifeProductPremium(SeamanPlanRequest(
+                .getLifeProductPremium(LifePCRequest(
                     publicTermLifeProductId,
                     {publicTermLifeAge: age, publicTermLifeSI: sumInsure}))
                 .then((dataState) {

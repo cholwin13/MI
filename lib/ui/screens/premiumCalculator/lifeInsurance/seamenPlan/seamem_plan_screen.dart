@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:test_pj_mi/core/data_state.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 
-import '../../../../../data/vos/life/seaman_plan/seaman_plan_request.dart';
+import '../../../../../data/vos/life/life_pc_request/life_pc_request.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
@@ -218,7 +218,7 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
             if(planReceivedData != null){
               RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
               test.getLifeProductPremium(
-                  SeamanPlanRequest(
+                  LifePCRequest(
                       seamanProductId,
                       {
                         seamanAge: age,

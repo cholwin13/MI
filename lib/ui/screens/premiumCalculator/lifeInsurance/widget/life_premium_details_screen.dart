@@ -25,16 +25,29 @@ class LifePremiumDetailsScreen extends StatefulWidget {
 
 class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
   double totalLossReturn = 10.00;
-  double totalPremium = 10.00;
-  late double premiumAmount;
+  late String totalPremium;
+  late String premiumAmount;
   late double sumInsure;
+  late String productName;
+  late String stampFee;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    premiumAmount = widget.arguments.sumInsure != null ? widget.arguments.sumInsure!.toDouble() : totalLossReturn;
-    sumInsure = widget.arguments.sumInsure != null ? (widget.arguments.sumInsure!.toDouble() * 30 / 100000) : totalLossReturn;
+    if(widget.arguments.responseData != null){
+      sumInsure = widget.arguments.sumInsure!.toDouble();
+      productName = widget.arguments.responseData![0].name;
+      premiumAmount = widget.arguments.responseData![0].premium.toStringAsFixed(2);
+
+      totalPremium = (widget.arguments.responseData![0].premium).toStringAsFixed(2);
+    }
+    if(widget.arguments.isStampFee == true){
+      stampFee = ((widget.arguments.sumInsure! * 30) / 100000).toStringAsFixed(2);
+      double stampFeeValue = (widget.arguments.sumInsure! * 30) / 100000;
+      double premiumValue = widget.arguments.responseData![0].premium;
+      totalPremium = (premiumValue + stampFeeValue).toStringAsFixed(2);
+    }
   }
 
   @override
@@ -81,7 +94,7 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                     child: Column(
                       children: [
                         PremiumAndTypesWidget(
-                          premiumTxt: premiumAmount.toStringAsFixed(2),
+                          premiumTxt: sumInsure.toStringAsFixed(2),
                           typesTxt: 'kyarfishing_sum_insure'.tr(),
                           isMMK: widget.arguments.isMMK,
                         ),
@@ -98,29 +111,16 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              widget.arguments.responseData != null
-                                  ? Flexible(
-                                      child: NormalTxtWidget(
-                                      txt: widget
-                                          .arguments.responseData![0].name,
-                                      fontColor: context.appColors.colorPrimary,
-                                    ))
-                                  : Flexible(
-                                      child: NormalTxtWidget(
-                                      txt: 'sth premium',
-                                      fontColor: context.appColors.colorPrimary,
-                                    )),
-                              widget.arguments.responseData != null
-                                  ? NormalTxtWidget(
-                                      txt:
-                                          '${widget.arguments.responseData![0].premium.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
-                                      fontColor: context.appColors.colorPrimary,
-                                    )
-                                  : NormalTxtWidget(
-                                      txt:
-                                          '${10.0.toStringAsFixed(2)} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
-                                      fontColor: context.appColors.colorPrimary,
-                                    )
+                              Flexible(
+                                  child: NormalTxtWidget(
+                                    txt: productName,
+                                    fontColor: context.appColors.colorPrimary,
+                                  )),
+                              NormalTxtWidget(
+                                txt:
+                                '$premiumAmount ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                fontColor: context.appColors.colorPrimary,
+                              )
                             ],
                           ),
                         ),
@@ -139,34 +139,20 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
                                   txt: 'Stamp Fees',
                                   fontColor: context.appColors.colorPrimary,
                                 )),
-                                widget.arguments.responseData != null
-                                    ? NormalTxtWidget(
-                                        txt:
-                                            '${sumInsure} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
-                                        fontColor:
-                                            context.appColors.colorPrimary,
-                                      )
-                                    : NormalTxtWidget(
-                                        txt:
-                                            '${0.00} ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
-                                        fontColor:
-                                            context.appColors.colorPrimary,
-                                      )
+                                NormalTxtWidget(
+                                  txt:
+                                  '$stampFee ${widget.arguments.isMMK ? 'MMK' : 'USD'}',
+                                  fontColor:
+                                  context.appColors.colorPrimary,
+                                )
                               ],
                             ),
                           ),
                         Divider(
                           color: context.appColors.colorPrimary,
                         ),
-                        if (widget.arguments.isStampFee == true)
-                          PremiumAndTypesWidget(
-                            premiumTxt: widget.arguments.responseData != null ? widget.arguments.responseData![0].premium.toStringAsFixed(2) : totalPremium.toStringAsFixed(2),
-                            typesTxt: 'life_total_payment'.tr(),
-                            isMMK: widget.arguments.isMMK,
-                          ),
                         PremiumAndTypesWidget(
-                          // premiumTxt: totalPremium.toStringAsFixed(2),
-                          premiumTxt: widget.arguments.responseData != null ? widget.arguments.responseData![0].premium.toStringAsFixed(2) : totalPremium.toStringAsFixed(2),
+                          premiumTxt: totalPremium,
                           typesTxt: 'life_total_payment'.tr(),
                           isMMK: widget.arguments.isMMK,
                         ),

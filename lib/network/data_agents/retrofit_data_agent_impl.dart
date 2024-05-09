@@ -59,37 +59,18 @@
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/dio.dart';
+import 'package:test_pj_mi/data/vos/life/life_pc_payment_request/life_pc_payment_request.dart';
 import 'package:test_pj_mi/network/responses/life_product_premium_response/life_product_premium_response.dart';
 import 'package:test_pj_mi/network/responses/tpl_print_certificate_response.dart';
 
 import '../../core/data_state.dart';
-import '../../data/vos/life/seaman_plan/seaman_plan_request.dart';
+import '../../data/vos/life/life_pc_request/life_pc_request.dart';
 import '../api_service.dart';
 import 'data_agents.dart';
 
 class RetrofitDataAgentImpl {
   final ApiService _apiService;
   RetrofitDataAgentImpl(this._apiService);
-
-  // late ApiService _apiService;
-  //
-  // static TplPrintCertificateRecordHistoryRepoImpl? _singleton;
-  //
-  // factory TplPrintCertificateRecordHistoryRepoImpl() {
-  //   _singleton ??= TplPrintCertificateRecordHistoryRepoImpl._internal();
-  //   return _singleton!;
-  // }
-  //
-  // TplPrintCertificateRecordHistoryRepoImpl._internal() {
-  //   final dio = Dio();
-  //   _apiService = ApiService(dio);
-  // }
-
-  // @override
-  // Future<DataState<TplPrintCertificateRecordHistoryResponse>> getRecordHistory(String vehicleNo) {
-  //   // TODO: implement getRecordHistory
-  //   throw UnimplementedError();
-  // }
 
   Future<DataState<TPLPrintCertificateResponse>> getRecordHistory(
       String vehicleNo) async {
@@ -109,7 +90,7 @@ class RetrofitDataAgentImpl {
     }
   }
 
-  Future<DataState<List<LifeProductPremiumResponse>>> getLifeProductPremium(SeamanPlanRequest seamanPlanRequest) async {
+  Future<DataState<List<LifeProductPremiumResponse>>> getLifeProductPremium(LifePCRequest lifePCRequest) async {
     // final httpResponse = await _apiService.getLifeProductPremium(
     //     SeamanPlanRequest(
     //         "ISPRD003001000000014110082023",
@@ -120,10 +101,36 @@ class RetrofitDataAgentImpl {
     //         )
     // );
     final httpResponse =
-        await _apiService.getLifeProductPremium(seamanPlanRequest);
+        await _apiService.getLifeProductPremium(lifePCRequest);
     if (httpResponse.response.statusCode == 200) {
       return DataSuccess(httpResponse.data);
     } else {
+      return DataError(DioException(
+        error: httpResponse.response.statusMessage,
+        response: httpResponse.response,
+        requestOptions: httpResponse.response.requestOptions,
+      ));
+    }
+  }
+
+  Future<DataState<List<LifeProductPremiumResponse>>> getLifePaymentProductPremium(LifePCPaymentRequest lifePCPaymentRequest) async {
+    // final httpResponse = await _apiService.getLifePaymentProductPremium(
+    //   LifePCPaymentRequest(
+    //   "ISPRD003001000009589529032019",
+    //       50000,
+    //       "ISSYS0090001000000000229032013", // payment type
+    //   {
+    //     "ISSYS0130001000000000829032013":"7", // term
+    //     "ISSYS013001000000030730062015":"10" // age
+    //   }
+    //   )
+    // );
+
+    final httpResponse = await _apiService.getLifePaymentProductPremium(lifePCPaymentRequest);
+
+    if(httpResponse.response.statusCode == 200){
+      return DataSuccess((httpResponse.data));
+    }else{
       return DataError(DioException(
         error: httpResponse.response.statusMessage,
         response: httpResponse.response,
