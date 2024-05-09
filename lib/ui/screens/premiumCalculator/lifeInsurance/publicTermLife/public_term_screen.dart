@@ -179,7 +179,7 @@ class _PublicTermLifePCScreenState extends State<PublicTermLifePCScreen> {
                           appBarIcon: AppImages.lifePublicTermIcon,
                           isStampFee: true,
                           responseData: data,
-                        sumInsure: int.parse(sumInsure)
+                        sumInsure: double.parse(sumInsure)
                       ));
                 } else {
                   print('Fail');

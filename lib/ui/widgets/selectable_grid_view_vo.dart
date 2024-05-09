@@ -6,12 +6,16 @@ class SelectableGridViewVO {
   String? icon;
   String? descTxt; // eg: Life 'years' text
   bool? isLifePeriod;
+  String? paymentId;
+  String? periodYrs;
 
   SelectableGridViewVO({
     required this.title,
     this.icon,
     required this.id,
     this.descTxt,
-    this.isLifePeriod
+    this.isLifePeriod,
+    this.paymentId,
+    this.periodYrs,
   });
 }

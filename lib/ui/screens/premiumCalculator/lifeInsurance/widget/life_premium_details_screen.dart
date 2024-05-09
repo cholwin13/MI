@@ -36,7 +36,7 @@ class _LifePremiumDetailsScreenState extends State<LifePremiumDetailsScreen> {
     // TODO: implement initState
     super.initState();
     if(widget.arguments.responseData != null){
-      sumInsure = widget.arguments.sumInsure!.toDouble();
+      sumInsure = widget.arguments.sumInsure!;
       productName = widget.arguments.responseData![0].name;
       premiumAmount = widget.arguments.responseData![0].premium.toStringAsFixed(2);
 

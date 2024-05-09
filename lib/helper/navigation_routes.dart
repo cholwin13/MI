@@ -96,6 +96,7 @@ import '../ui/screens/premiumCalculator/lifeInsurance/govPersonalShortTerm/gov_p
 import '../ui/screens/premiumCalculator/lifeInsurance/health/widget/widget_additional_cover.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/shore_job/shore_job_payment_screen.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/short_term_payment_screen.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/widget/widget_short_term.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/widget/life_premium_details_screen.dart';
 import '../ui/screens/settings/Settings.dart';
 import '../ui/widgets/coverage_type_picker.dart';
@@ -733,7 +734,9 @@ class CustomNavigationHelper {
                 path: Routes.lifeShortTermPaymentPath.path,
                 pageBuilder: (context, state) {
                   return MaterialPage(
-                    child: const ShortTermPaymentScreen(),
+                    child: ShortTermPaymentScreen(
+                      arguments: state.extra as ShortTermWidget,
+                    ),
                     key: state.pageKey,
                   );
                 },

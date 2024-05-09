@@ -1,18 +1,13 @@
-import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
+import 'package:test_pj_mi/ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/widget/widget_short_term.dart';
 
-import '../../../../../core/data_state.dart';
-import '../../../../../data/vos/life/life_pc_payment_request/life_pc_payment_request.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
 import '../../../../../helper/navigation_routes.dart';
-import '../../../../../injector.dart';
-import '../../../../../network/data_agents/retrofit_data_agent_impl.dart';
-import '../../../../../network/responses/life_product_premium_response/life_product_premium_response.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../widgets/app_bar_widget.dart';
 import '../../../../widgets/widget_date_picker_text_form_field.dart';
@@ -35,8 +30,9 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
   TextEditingController ageController = TextEditingController();
   TextEditingController sumInsureTxtController = TextEditingController();
 
-  String age = '';
-  String sumInsure = '';
+  late DateTime todayDate;
+  late DateTime lastDob;
+  late DateTime startDob;
 
   String? validateDOB(value) {
     if (value!.isEmpty) {
@@ -44,12 +40,6 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
     } else {
       return null;
     }
-  }
-
-  void handleInsureChanged(String value) {
-    setState(() {
-      sumInsure = value;
-    });
   }
 
   String? validateInsure(value){
@@ -66,42 +56,14 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
   @override
   void initState() {
     super.initState();
+    todayDate = DateTime.now();
+    lastDob = DateTime(todayDate.year - 9, todayDate.month, todayDate.day - 1);
+    startDob = DateTime(todayDate.year - 60, todayDate.month, todayDate.day);
 
-    RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
-    test.getLifePaymentProductPremium(
-        LifePCPaymentRequest(
-            "ISPRD003001000009589529032019",
-            50000,
-            "ISSYS0090001000000000229032013", // payment type
-            {
-              "ISSYS0130001000000000829032013":"7", // term
-              "ISSYS013001000000030730062015":"10" // age
-            }
-        )
-    ).then((dataState) {
-      if (dataState is DataSuccess) {
-        if (dataState.data != null) {
-          List<LifeProductPremiumResponse> responseData = dataState.data as List<LifeProductPremiumResponse>;
-          print("success -..");
-          print(jsonEncode(responseData));
-        } else {
-          print('Fail');
-        }
-      } else if (dataState is DataError) {
-        print("Error -....");
-        print(dataState.error);
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    DateTime todayDate = DateTime.now();
-    final lastDob =
-    DateTime(todayDate.year - 9, todayDate.month, todayDate.day - 1);
-    final startDob =
-    DateTime(todayDate.year - 60, todayDate.month, todayDate.day);
-
     return Scaffold(
         appBar: AppBarWidget(
           titleIcon: Image.asset(
@@ -160,7 +122,6 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
                     height: kMarginSmall,
                   ),
                   CustomTextFormFieldWidget(
-                    onChanged: handleInsureChanged,
                     hintTxt: 'sum_insured_hint'.tr(),
                     textController: sumInsureTxtController,
                     validator: validateInsure,
@@ -176,10 +137,12 @@ class _ShortTermEndowmentPCScreenState extends State<ShortTermEndowmentPCScreen>
           final isValid = formKey.currentState?.validate();
           if (isValid!) {
             CustomNavigationHelper.router.push(
-                Routes.lifeShortTermPaymentPath.path
+                Routes.lifeShortTermPaymentPath.path,
+              extra: ShortTermWidget(double.parse(sumInsureTxtController.text), ageController.text)
             );
           }
-        }, txt: 'next_btn_txt'.tr(),
+        },
+        txt: 'next_btn_txt'.tr(),
       ),
     );
   }

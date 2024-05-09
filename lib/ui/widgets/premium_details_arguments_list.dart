@@ -8,7 +8,7 @@ class PremiumDetailsArguments {
   final List<AddOnList>? addOnList;
   final bool? isStampFee;
   final List<LifeProductPremiumResponse>? responseData;
-  final int? sumInsure;
+  final double? sumInsure;
 
   PremiumDetailsArguments({
     required this.title,
