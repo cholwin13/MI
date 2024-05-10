@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:test_pj_mi/data/vos/life/life_pc_request/life_pc_request.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 import 'package:test_pj_mi/ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/widget/widget_short_term.dart';
 
 import '../../../../../core/data_state.dart';
-import '../../../../../data/vos/life/life_pc_payment_request/life_pc_payment_request.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/dimens.dart';
 import '../../../../../helper/navigation_routes.dart';
@@ -73,10 +73,11 @@ class _ShortTermPaymentScreenState extends State<ShortTermPaymentScreen> {
     if (formKey.currentState!.validate()) {
       RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
       test
-          .getLifePaymentProductPremium(LifePCPaymentRequest(
+          .getLifeProductPremium(LifePCRequest(
               "ISPRD003001000009589529032019", // productId
               widget.arguments.sumInsure,
               selectedPaymentVO.paymentId!, // payment type
+              null,
               {
             "ISSYS0130001000000000829032013": selectedPeriodVO.periodYrs!, // term
             "ISSYS013001000000030730062015": widget.arguments.age // age

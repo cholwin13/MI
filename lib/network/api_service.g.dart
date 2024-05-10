@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://37.111.50.42:8484';
+    baseUrl ??= 'https://mionlineapi.com:8443';
   }
 
   final Dio _dio;
@@ -57,40 +57,6 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(lifePCRequest.toJson());
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<LifeProductPremiumResponse>>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/milifeapi/ws/getLifeProductPremium',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) =>
-            LifeProductPremiumResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
-  Future<HttpResponse<List<LifeProductPremiumResponse>>>
-      getLifePaymentProductPremium(
-          LifePCPaymentRequest lifePCPaymentRequest) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(lifePCPaymentRequest.toJson());
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<LifeProductPremiumResponse>>>(Options(
       method: 'POST',

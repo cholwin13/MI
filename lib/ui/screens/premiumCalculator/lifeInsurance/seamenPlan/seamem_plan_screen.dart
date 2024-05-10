@@ -19,6 +19,7 @@ import '../../../../widgets/coverage_type_picker.dart';
 import '../../../../widgets/coverage_type_picker_list.dart';
 import '../../../../widgets/widget_arrow_text_form_field.dart';
 import '../../../../widgets/widget_date_picker_text_form_field.dart';
+import '../../../../widgets/widget_label_and_value.dart';
 import '../../../../widgets/widget_label_txt_form_field.dart';
 import '../../../../widgets/widget_next_btn.dart';
 import '../../../../widgets/widget_product_info_detail_title.dart';
@@ -73,12 +74,12 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
   // ];
 
   List<Map<String, dynamic>> planList = [
-    {"label": "Plan1", "value": "ISSYS0090001000000000108092023", 'insureAmt': 10000000},
-    {"label": "Plan2", "value": "ISSYS0090001000000000208092023", 'insureAmt': 20000000},
-    {"label": "Plan3", "value": "ISSYS0090001000000000308092023", 'insureAmt': 40000000},
-    {"label": "Plan4", "value": "ISSYS0090001000000000408092023", 'insureAmt': 60000000},
-    {"label": "Plan5", "value": "ISSYS0090001000000000508092023", 'insureAmt': 80000000},
-    {"label": "Plan6", "value": "ISSYS0090001000000000608092023", 'insureAmt': 100000000},
+    {"label": "Plan1", "value": "ISSYS0090001000000000108092023", 'insureAmt': "10000000"},
+    {"label": "Plan2", "value": "ISSYS0090001000000000208092023", 'insureAmt': "20000000"},
+    {"label": "Plan3", "value": "ISSYS0090001000000000308092023", 'insureAmt': "40000000"},
+    {"label": "Plan4", "value": "ISSYS0090001000000000408092023", 'insureAmt': "60000000"},
+    {"label": "Plan5", "value": "ISSYS0090001000000000508092023", 'insureAmt': "80000000"},
+    {"label": "Plan6", "value": "ISSYS0090001000000000608092023", 'insureAmt': "100000000"},
   ];
 
   @override
@@ -185,7 +186,7 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
                             appBarIcon: AppImages.lifeSeamanIcon,
                             coverageTypeTitle: AppStrings.seamenPlan,
                           labelList: planList
-                              .map((item) => WidgetLabel(
+                              .map((item) => WidgetLabelAndValue(
                             label: item['label']!,
                             value: item['value']!,
                           )).toList(),
@@ -220,6 +221,9 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
               test.getLifeProductPremium(
                   LifePCRequest(
                       seamanProductId,
+                      null,
+                      null,
+                      null,
                       {
                         seamanAge: age,
                         seamanPlan: planReceivedData!
@@ -239,7 +243,7 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
                             isMMK: true,
                             appBarIcon: AppImages.lifeSeamanIcon,
                           responseData: data,
-                          sumInsure: insureAmount
+                          sumInsure: double.parse(insureAmount)
                         ));
                   } else {
                     print('Fail');
@@ -265,12 +269,3 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
   }
 }
 
-class WidgetLabel {
-  final String label;
-  final String value;
-
-  WidgetLabel({
-    required this.label,
-    required this.value,
-  });
-}

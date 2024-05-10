@@ -9,11 +9,19 @@ part of 'life_pc_request.dart';
 LifePCRequest _$LifePCRequestFromJson(Map<String, dynamic> json) =>
     LifePCRequest(
       json['productId'] as String,
-      Map<String, String>.from(json['keyFactorMap'] as Map),
+      (json['sumInsured'] as num?)?.toDouble(),
+      json['paymentType'] as String?,
+      json['unit'] as int?,
+      (json['keyFactorMap'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
     );
 
 Map<String, dynamic> _$LifePCRequestToJson(LifePCRequest instance) =>
     <String, dynamic>{
       'productId': instance.productId,
+      'sumInsured': instance.sumInsured,
+      'paymentType': instance.paymentType,
+      'unit': instance.unit,
       'keyFactorMap': instance.keyFactorMap,
     };

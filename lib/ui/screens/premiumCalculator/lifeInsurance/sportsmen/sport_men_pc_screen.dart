@@ -1,17 +1,23 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:test_pj_mi/data/vos/life/life_pc_request/life_pc_request.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 
+import '../../../../../core/data_state.dart';
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
 import '../../../../../helper/navigation_routes.dart';
+import '../../../../../injector.dart';
+import '../../../../../network/data_agents/retrofit_data_agent_impl.dart';
+import '../../../../../network/responses/life_product_premium_response/life_product_premium_response.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../widgets/app_bar_widget.dart';
-import '../../../../widgets/coverage_type_picker_list.dart';
-import '../../../../widgets/premium_details_arguments_list.dart';
+import '../../../../widgets/coverage_type_picker.dart';
 import '../../../../widgets/widget_arrow_text_form_field.dart';
-import '../../../../widgets/widget_label.dart';
+import '../../../../widgets/widget_label_and_value.dart';
 import '../../../../widgets/widget_label_txt_form_field.dart';
 import '../../../../widgets/widget_min_max_label_txt.dart';
 import '../../../../widgets/widget_next_btn.dart';
@@ -60,14 +66,42 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
     }
   }
 
-
-  List<WidgetLabel> sportsmanUnitList = [
-    WidgetLabel(label: '1 Unit'),
-    WidgetLabel(label: '2 Unit'),
-    WidgetLabel(label: '3 Unit'),
-    WidgetLabel(label: '4 Unit'),
-    WidgetLabel(label: '5 Unit'),
+  List<Map<String, dynamic>> sportsmanUnitList = [
+    {"label": '1 Unit', "value": "1"},
+    {"label": '2 Unit', "value": "2"},
+    {"label": '3 Unit', "value": "3"},
+    {"label": '4 Unit', "value": "4"},
+    {"label": '5 Unit', "value": "5"},
   ];
+
+  void _onSubmit(){
+    if(formKey.currentState!.validate()){
+      int unit = int.parse(unitController.text);
+      RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
+      test.getLifeProductPremium(
+          LifePCRequest(
+              "ISPRD0030001000000002331032013", // product Id
+              null,
+              null,
+              unit,
+              null
+          )
+      ).then((dataState) {
+        if (dataState is DataSuccess) {
+          if (dataState.data != null) {
+            List<LifeProductPremiumResponse> responseData = dataState.data as List<LifeProductPremiumResponse>;
+            print("success -..");
+            print(jsonEncode(responseData));
+          } else {
+            print('Fail');
+          }
+        } else if (dataState is DataError) {
+          print("Error -....");
+          print(dataState.error);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,18 +140,25 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
                     validator: validateUnit,
                     onPressed: () async {
                       final result = await CustomNavigationHelper.router.push(
-                          Routes.coverageTypePickerPath.path,
-                          extra: CoverageTypePickerList(
+                          Routes.chooseCoverageTypePickerPath.path,
+                          extra: CoverageTypePicker(
                               title: 'sportsmen_insurance',
                               appBarIcon: AppImages.lifeSportMenIcon,
                               coverageTypeTitle: 'travel_insure_unit'.tr(),
-                              labelList: sportsmanUnitList
+                            labelList: sportsmanUnitList.map(
+                                    (item) => WidgetLabelAndValue(
+                                        label: item['label'],
+                                        value: item['value']))
+                                .toList(),
                           )
                       );
-                      setState(() {
-                        unitReceivedData = result as String?;
-                        unitController.text = unitReceivedData ?? '';
-                      });
+                      if(result != null){
+                        final selectedUnit = sportsmanUnitList.firstWhere((element) => element['label'] == result)['value'];
+                        setState(() {
+                          unitReceivedData = selectedUnit ?? '';
+                          unitController.text = unitReceivedData ?? '';
+                        });
+                      }
                     },
                   ),
                   const SizedBox(
@@ -190,17 +231,18 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
         ),
       bottomNavigationBar: NextBtnWidget(
         formKey: formKey,
-        onNextPressed: () {
-          final isValid = formKey.currentState?.validate();
-          if (isValid!) {
-            CustomNavigationHelper.router.push(
-                Routes.lifePremiumDetailsPath.path,
-                extra: PremiumDetailsArguments(
-                    title: 'sportsmen_insurance',
-                    isMMK: true,
-                    appBarIcon: AppImages.lifeSportMenIcon));
-          }
-        },
+        onNextPressed: () => _onSubmit(),
+        // onNextPressed: () {
+        //   final isValid = formKey.currentState?.validate();
+        //   // if (isValid!) {
+        //   //   CustomNavigationHelper.router.push(
+        //   //       Routes.lifePremiumDetailsPath.path,
+        //   //       extra: PremiumDetailsArguments(
+        //   //           title: 'sportsmen_insurance',
+        //   //           isMMK: true,
+        //   //           appBarIcon: AppImages.lifeSportMenIcon));
+        //   // }
+        // },
         txt: 'next_btn_txt'.tr(),
       ),
     );

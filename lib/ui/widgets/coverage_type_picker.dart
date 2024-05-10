@@ -1,11 +1,11 @@
 
-import '../screens/premiumCalculator/lifeInsurance/seamenPlan/seamem_plan_screen.dart';
+import 'package:test_pj_mi/ui/widgets/widget_label_and_value.dart';
 
 class CoverageTypePicker {
   final String title;
   final String appBarIcon;
   final String coverageTypeTitle;
-  final List<WidgetLabel> labelList;
+  final List<WidgetLabelAndValue> labelList;
 
   CoverageTypePicker({
     required this.title,

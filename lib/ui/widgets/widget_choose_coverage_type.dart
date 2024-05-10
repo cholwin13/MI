@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 import 'package:test_pj_mi/ui/widgets/coverage_type_picker.dart';
+import 'package:test_pj_mi/ui/widgets/widget_label_and_value.dart';
 import 'package:test_pj_mi/ui/widgets/widget_next_btn.dart';
 import 'package:test_pj_mi/ui/widgets/widget_product_info_detail_title.dart';
 
 import '../../helper/dimens.dart';
 import '../../helper/navigation_routes.dart';
-import '../screens/premiumCalculator/lifeInsurance/seamenPlan/seamem_plan_screen.dart';
 import 'app_bar_widget.dart';
 import 'coverage_type_picker_list.dart';
 
@@ -90,7 +90,7 @@ class _WidgetChooseCoverageTypePickerState extends State<WidgetChooseCoverageTyp
                           itemBuilder: (context, index) {
                             // WidgetLabel items =
                             // widget.arguments.labelList[index];
-                            WidgetLabel items = widget.arguments.labelList[index];
+                            WidgetLabelAndValue items = widget.arguments.labelList[index];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

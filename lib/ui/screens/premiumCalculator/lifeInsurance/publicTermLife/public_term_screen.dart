@@ -162,7 +162,11 @@ class _PublicTermLifePCScreenState extends State<PublicTermLifePCScreen> {
             test
                 .getLifeProductPremium(LifePCRequest(
                     publicTermLifeProductId,
-                    {publicTermLifeAge: age, publicTermLifeSI: sumInsure}))
+                    null,
+                    null,
+                    null,
+                    {publicTermLifeAge: age, publicTermLifeSI: sumInsure},
+            ))
                 .then((dataState) {
               if (dataState is DataSuccess) {
                 if (dataState.data != null) {
@@ -179,8 +183,7 @@ class _PublicTermLifePCScreenState extends State<PublicTermLifePCScreen> {
                           appBarIcon: AppImages.lifePublicTermIcon,
                           isStampFee: true,
                           responseData: data,
-                        sumInsure: double.parse(sumInsure)
-                      ));
+                          sumInsure: double.parse(sumInsure)));
                 } else {
                   print('Fail');
                 }

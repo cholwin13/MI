@@ -1,5 +1,6 @@
 /// Base URL
-const String baseUrlUAT= "http://37.111.50.42:8484";
+// const String baseUrl= "http://37.111.50.42:8484";
+const String baseUrl= "https://mionlineapi.com:8443";
 
 /// End Points
 const String endPointGetPrintCertificateForTpl = "/miwsp/ws/recordsHistory";
