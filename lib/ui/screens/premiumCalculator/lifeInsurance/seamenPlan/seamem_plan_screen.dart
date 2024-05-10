@@ -64,15 +64,6 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
     }
   }
 
-  // List<WidgetLabel> seamenPlanList = [
-  //   WidgetLabel(label: 'Plan1'),
-  //   WidgetLabel(label: 'Plan2'),
-  //   WidgetLabel(label: 'Plan3'),
-  //   WidgetLabel(label: 'Plan4'),
-  //   WidgetLabel(label: 'Plan5'),
-  //   WidgetLabel(label: 'Plan6'),
-  // ];
-
   List<Map<String, dynamic>> planList = [
     {"label": "Plan1", "value": "ISSYS0090001000000000108092023", 'insureAmt': "10000000"},
     {"label": "Plan2", "value": "ISSYS0090001000000000208092023", 'insureAmt': "20000000"},
@@ -227,7 +218,8 @@ class _SeamanPlanPCScreenState extends State<SeamanPlanPCScreen> {
                       {
                         seamanAge: age,
                         seamanPlan: planReceivedData!
-                      }
+                      },
+                    null
                   )
               ).then((dataState) {
                 if (dataState is DataSuccess) {

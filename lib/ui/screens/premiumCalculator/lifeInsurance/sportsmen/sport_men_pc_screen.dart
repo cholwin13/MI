@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:test_pj_mi/data/vos/life/life_pc_request/life_pc_add_on.dart';
 import 'package:test_pj_mi/data/vos/life/life_pc_request/life_pc_request.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
 
@@ -16,6 +17,7 @@ import '../../../../../network/responses/life_product_premium_response/life_prod
 import '../../../../../routes/app_routes.dart';
 import '../../../../widgets/app_bar_widget.dart';
 import '../../../../widgets/coverage_type_picker.dart';
+import '../../../../widgets/premium_details_arguments_list.dart';
 import '../../../../widgets/widget_arrow_text_form_field.dart';
 import '../../../../widgets/widget_label_and_value.dart';
 import '../../../../widgets/widget_label_txt_form_field.dart';
@@ -24,6 +26,7 @@ import '../../../../widgets/widget_next_btn.dart';
 import '../../../../widgets/widget_product_info_detail_title.dart';
 import '../../../../widgets/widgte_custom_text_form_field.dart';
 import '../../../../widgets/widget_normal_txt.dart';
+import '../publicTermLife/public_term_details_premium.dart';
 
 class SportMenPCScreen extends StatefulWidget {
   const SportMenPCScreen({super.key});
@@ -39,7 +42,6 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
 
   String abroad = 'No';
   String? unitReceivedData;
-  String period = '';
 
   String? validateUnit(value) {
     if (value!.isEmpty) {
@@ -47,12 +49,6 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
     } else {
       return null;
     }
-  }
-
-  void handlePeriodChanged(String value) {
-    setState(() {
-      period = value;
-    });
   }
 
   String? validatePeriod(value){
@@ -67,16 +63,35 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
   }
 
   List<Map<String, dynamic>> sportsmanUnitList = [
-    {"label": '1 Unit', "value": "1"},
-    {"label": '2 Unit', "value": "2"},
-    {"label": '3 Unit', "value": "3"},
-    {"label": '4 Unit', "value": "4"},
-    {"label": '5 Unit', "value": "5"},
+    {"label": '1 Unit', "value": "1", 'insureAmt': "1000000"},
+    {"label": '2 Unit', "value": "2", 'insureAmt': "2000000"},
+    {"label": '3 Unit', "value": "3", 'insureAmt': "3000000"},
+    {"label": '4 Unit', "value": "4", 'insureAmt': "4000000"},
+    {"label": '5 Unit', "value": "5", 'insureAmt': "5000000"},
   ];
 
   void _onSubmit(){
     if(formKey.currentState!.validate()){
       int unit = int.parse(unitController.text);
+      String? period = periodTxtController.text;
+
+      final selectedUnit = sportsmanUnitList.firstWhere((item) => item['value'] == unitReceivedData);
+      final insureAmount = selectedUnit["insureAmt"];
+
+      List<LifePCAddOn> addOnList = [];
+
+      if(period.isNotEmpty){
+        addOnList.add(
+            LifePCAddOn(
+                "ISSYS014001000009592227022019",
+                null,
+                {
+                  "ISSYS013001000009442718072017": periodTxtController.text
+                }
+            )
+        );
+      }
+
       RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
       test.getLifeProductPremium(
           LifePCRequest(
@@ -84,14 +99,24 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
               null,
               null,
               unit,
-              null
+              null,
+             addOnList
           )
       ).then((dataState) {
         if (dataState is DataSuccess) {
           if (dataState.data != null) {
             List<LifeProductPremiumResponse> responseData = dataState.data as List<LifeProductPremiumResponse>;
-            print("success -..");
-            print(jsonEncode(responseData));
+            CustomNavigationHelper.router.push(
+                Routes.publicTermLifePremiumDetailsPath.path,
+                extra: PublicTermPremiumDetailsArguments(
+                    title: 'sportsmen_insurance',
+                    isMMK: true,
+                    appBarIcon: AppImages.lifeSportMenIcon,
+                  sumInsure: double.parse(insureAmount),
+                  unit: unit,
+                  responseData: responseData,
+                  isAbroad: abroad
+                ));
           } else {
             print('Fail');
           }
@@ -217,7 +242,6 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
                           height: kMarginSmall,
                         ),
                         CustomTextFormFieldWidget(
-                          onChanged: handlePeriodChanged,
                           hintTxt: 'sportsman_period_hint_txt'.tr(),
                           textController: periodTxtController,
                           validator: validatePeriod,
@@ -232,17 +256,6 @@ class _SportMenPCScreenState extends State<SportMenPCScreen> {
       bottomNavigationBar: NextBtnWidget(
         formKey: formKey,
         onNextPressed: () => _onSubmit(),
-        // onNextPressed: () {
-        //   final isValid = formKey.currentState?.validate();
-        //   // if (isValid!) {
-        //   //   CustomNavigationHelper.router.push(
-        //   //       Routes.lifePremiumDetailsPath.path,
-        //   //       extra: PremiumDetailsArguments(
-        //   //           title: 'sportsmen_insurance',
-        //   //           isMMK: true,
-        //   //           appBarIcon: AppImages.lifeSportMenIcon));
-        //   // }
-        // },
         txt: 'next_btn_txt'.tr(),
       ),
     );

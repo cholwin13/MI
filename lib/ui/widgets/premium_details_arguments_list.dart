@@ -9,6 +9,7 @@ class PremiumDetailsArguments {
   final bool? isStampFee;
   final List<LifeProductPremiumResponse>? responseData;
   final double? sumInsure;
+  final int? unit;
 
   PremiumDetailsArguments({
     required this.title,
@@ -17,6 +18,7 @@ class PremiumDetailsArguments {
     this.addOnList,
     this.isStampFee,
     this.responseData,
-    this.sumInsure
+    this.sumInsure,
+    this.unit
   });
 }

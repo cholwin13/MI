@@ -109,6 +109,7 @@ enum Routes {
   lifePremiumDetailsPath('lifePremiumDetails', '/lifePremiumDetails'),
   coverageTypePickerPath('coverageTypePicker', '/coverageTypePicker'),
   chooseCoverageTypePickerPath('chooseCoverageTypePicker', '/chooseCoverageTypePicker'),
+  publicTermLifePremiumDetailsPath('publicTermLifePremiumDetails', '/publicTermLifePremiumDetails'),
 
   /// General Insurance Premium Calculator (Travel)
   travelPClLocalPath('travelPCLocal', '/travelPCLocal'),

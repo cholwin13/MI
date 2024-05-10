@@ -14,4 +14,9 @@ class LifePCAddOn{
   Map<String, dynamic> keyFactorMap;
 
   LifePCAddOn(this.addOnId, this.value, this.keyFactorMap);
+
+  factory LifePCAddOn.fromJson(Map<String, dynamic> json) => _$LifePCAddOnFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LifePCAddOnToJson(this);
+
 }

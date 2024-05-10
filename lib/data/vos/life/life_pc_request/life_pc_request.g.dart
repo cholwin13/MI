@@ -15,6 +15,9 @@ LifePCRequest _$LifePCRequestFromJson(Map<String, dynamic> json) =>
       (json['keyFactorMap'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
       ),
+      (json['addOnList'] as List<dynamic>)
+          .map((e) => LifePCAddOn.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$LifePCRequestToJson(LifePCRequest instance) =>
@@ -24,4 +27,5 @@ Map<String, dynamic> _$LifePCRequestToJson(LifePCRequest instance) =>
       'paymentType': instance.paymentType,
       'unit': instance.unit,
       'keyFactorMap': instance.keyFactorMap,
+      'addOnList': instance.addOnList,
     };

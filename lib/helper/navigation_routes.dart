@@ -11,6 +11,7 @@ import 'package:test_pj_mi/ui/screens/login/enter_code_screen.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_invoice_no.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_details_screen.dart';
 import 'package:test_pj_mi/ui/screens/onlineBiller/online_biller_payment_info_screen.dart';
+import 'package:test_pj_mi/ui/screens/premiumCalculator/lifeInsurance/publicTermLife/public_term_details_premium.dart';
 import 'package:test_pj_mi/ui/screens/printCertificate/print_certificate_home.dart';
 import 'package:test_pj_mi/ui/screens/printCertificate/tpl_print_certificate_history_screen.dart';
 import 'package:test_pj_mi/ui/screens/visionAndMission/vision_and_mission.dart';
@@ -674,6 +675,22 @@ class CustomNavigationHelper {
                   return MaterialPage(
                     child: LifePremiumDetailsScreen(
                       arguments: state.extra as PremiumDetailsArguments,
+                    ),
+                    key: state.pageKey,
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.publicTermLifePremiumDetailsPath.path,
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                    child: PublicTermDetailsPremium(
+                      arguments: state.extra as PublicTermPremiumDetailsArguments,
                     ),
                     key: state.pageKey,
                   );
