@@ -20,4 +20,9 @@ abstract class ApiService {
   Future<HttpResponse<List<LifeProductPremiumResponse>>> getLifeProductPremium(
       @Body() LifePCRequest lifePCRequest
       );
+
+  @POST(endPointHealthLifePremiumPc)
+  Future<HttpResponse<List<LifeProductPremiumResponse>>> getHealthLifeProductPremium(
+      @Body() LifePCRequest lifePCRequest
+      );
 }

@@ -1,18 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:test_pj_mi/ui/screens/premiumCalculator/lifeInsurance/health/widget/widget_health.dart';
 
 import '../../../../../helper/app_images.dart';
 import '../../../../../helper/app_strings.dart';
 import '../../../../../helper/dimens.dart';
 import '../../../../../helper/navigation_routes.dart';
 import '../../../../../routes/app_routes.dart';
-import '../../../../widgets/coverage_type_picker_list.dart';
-import '../../../../widgets/premium_details_arguments_list.dart';
+import '../../../../widgets/coverage_type_picker.dart';
 import '../../../../widgets/selectable_grid_view_vo.dart';
 import '../../../../widgets/widget_arrow_text_form_field.dart';
 import '../../../../widgets/widget_date_picker_text_form_field.dart';
-import '../../../../widgets/widget_label.dart';
+import '../../../../widgets/widget_label_and_value.dart';
 import '../../../../widgets/widget_label_txt_form_field.dart';
 import '../../../../widgets/widget_next_btn.dart';
 import '../../../../widgets/widget_selectable_grid_view.dart';
@@ -33,7 +32,13 @@ class _HealthIndividualScreenState extends State<HealthIndividualScreen> {
   TextEditingController unitController = TextEditingController();
 
   String age = '';
+  int unit = 0;
+  String paymentId = '';
   String? unitReceivedData;
+  late DateTime todayDate;
+  late DateTime lastDob;
+  late DateTime startDob;
+  late SelectableGridViewVO selectedPaymentVO;
 
   String? validateDOB(value) {
     if (value!.isEmpty) {
@@ -51,47 +56,72 @@ class _HealthIndividualScreenState extends State<HealthIndividualScreen> {
     }
   }
 
-  List<WidgetLabel> seamenUnitList = [
-    WidgetLabel(label: '1 Unit'),
-    WidgetLabel(label: '2 Unit'),
-    WidgetLabel(label: '3 Unit'),
-    WidgetLabel(label: '4 Unit'),
-    WidgetLabel(label: '5 Unit'),
-    WidgetLabel(label: '6 Unit'),
-    WidgetLabel(label: '7 Unit'),
-    WidgetLabel(label: '8 Unit'),
-    WidgetLabel(label: '9 Unit'),
-    WidgetLabel(label: '10 Unit'),
-    WidgetLabel(label: '11 Unit'),
-    WidgetLabel(label: '12 Unit'),
-    WidgetLabel(label: '13 Unit'),
-    WidgetLabel(label: '14 Unit'),
-    WidgetLabel(label: '15 Unit'),
-    WidgetLabel(label: '16 Unit'),
-    WidgetLabel(label: '17 Unit'),
-    WidgetLabel(label: '18 Unit'),
-    WidgetLabel(label: '19 Unit'),
-    WidgetLabel(label: '20 Unit'),
-    WidgetLabel(label: '21 Unit'),
-    WidgetLabel(label: '22 Unit'),
-    WidgetLabel(label: '23 Unit'),
-    WidgetLabel(label: '24 Unit'),
-    WidgetLabel(label: '25 Unit'),
+  List<Map<String, dynamic>> healthUnitList = [
+    {"label": '1 Unit', "value": "1", 'insureAmt': "1000000"},
+    {"label": '2 Unit', "value": "2", 'insureAmt': "2000000"},
+    {"label": '3 Unit', "value": "3", 'insureAmt': "3000000"},
+    {"label": '4 Unit', "value": "4", 'insureAmt': "4000000"},
+    {"label": '5 Unit', "value": "5", 'insureAmt': "5000000"},
+    {"label": '6 Unit', "value": "1", 'insureAmt': "1000000"},
+    {"label": '7 Unit', "value": "2", 'insureAmt': "2000000"},
+    {"label": '8 Unit', "value": "3", 'insureAmt': "3000000"},
+    {"label": '9 Unit', "value": "4", 'insureAmt': "4000000"},
+    {"label": '10 Unit', "value": "5", 'insureAmt': "5000000"},
+    {"label": '11 Unit', "value": "1", 'insureAmt': "1000000"},
+    {"label": '12 Unit', "value": "2", 'insureAmt': "2000000"},
+    {"label": '13 Unit', "value": "3", 'insureAmt': "3000000"},
+    {"label": '14 Unit', "value": "4", 'insureAmt': "4000000"},
+    {"label": '15 Unit', "value": "5", 'insureAmt': "5000000"},
+    {"label": '16 Unit', "value": "1", 'insureAmt': "1000000"},
+    {"label": '17 Unit', "value": "2", 'insureAmt': "2000000"},
+    {"label": '18 Unit', "value": "3", 'insureAmt': "3000000"},
+    {"label": '19 Unit', "value": "4", 'insureAmt': "4000000"},
+    {"label": '20 Unit', "value": "5", 'insureAmt': "5000000"},
+    {"label": '21 Unit', "value": "1", 'insureAmt': "1000000"},
+    {"label": '22 Unit', "value": "2", 'insureAmt': "2000000"},
+    {"label": '23 Unit', "value": "3", 'insureAmt': "3000000"},
+    {"label": '24 Unit', "value": "4", 'insureAmt': "4000000"},
+    {"label": '25 Unit', "value": "5", 'insureAmt': "5000000"},
   ];
 
   final List<SelectableGridViewVO> paymentCardList = [
-    SelectableGridViewVO(id: 3, title: 'quarter'.tr()),
-    SelectableGridViewVO(id: 3, title: 'semi_annual'.tr()),
+    SelectableGridViewVO(
+        id: 1,
+        title: 'lump_sum'.tr(),
+        paymentId: "ISSYS0090001000000000429032013"
+    ),
+    SelectableGridViewVO(
+        id: 2,
+        title: 'semi_annual'.tr(),
+        paymentId: "ISSYS0090001000000000229032013"
+    ),
   ];
 
   @override
-  Widget build(BuildContext context) {
-    DateTime todayDate = DateTime.now();
-    final lastDob =
+  void initState() {
+    super.initState();
+    todayDate = DateTime.now();
+    lastDob =
     DateTime(todayDate.year - 5, todayDate.month, todayDate.day - 1);
-    final startDob =
+    startDob =
     DateTime(todayDate.year - 76, todayDate.month, todayDate.day);
+    selectedPaymentVO = paymentCardList.first;
+  }
 
+  void _onSubmit(){
+    if(formKey.currentState!.validate()){
+      age = ageController.text;
+      unit = int.parse(unitReceivedData!);
+      paymentId = selectedPaymentVO.paymentId!;
+          CustomNavigationHelper.router.push(
+              Routes.healthAdditionalCoverPath.path,
+                  extra: HealthWidget(age, unit, paymentId)
+          );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
         key: formKey,
@@ -136,18 +166,25 @@ class _HealthIndividualScreenState extends State<HealthIndividualScreen> {
                 validator: validateUnit,
                 onPressed: () async {
                   final result = await CustomNavigationHelper.router.push(
-                      Routes.coverageTypePickerPath.path,
-                      extra: CoverageTypePickerList(
+                      Routes.chooseCoverageTypePickerPath.path,
+                      extra: CoverageTypePicker(
                           title: 'health_insurance',
                           appBarIcon: AppImages.lifeHealthIcon,
                           coverageTypeTitle: 'travel_insure_unit'.tr(),
-                          labelList: seamenUnitList
+                        labelList: healthUnitList.map(
+                                (item) => WidgetLabelAndValue(
+                                label: item['label'],
+                                value: item['value']))
+                            .toList(),
                       )
                   );
-                  setState(() {
-                    unitReceivedData = result as String?;
-                    unitController.text = unitReceivedData ?? '';
-                  });
+                  if(result != null){
+                    final selectedUnit = healthUnitList.firstWhere((element) => element['label'] == result)['value'];
+                    setState(() {
+                      unitReceivedData = selectedUnit ?? '';
+                      unitController.text = unitReceivedData ?? '';
+                    });
+                  }
                 },
               ),
               const SizedBox(
@@ -162,6 +199,12 @@ class _HealthIndividualScreenState extends State<HealthIndividualScreen> {
                 child: SelectableGridView(
                   cardList: paymentCardList,
                   isLifePC: true,
+                  selectedCard: selectedPaymentVO,
+                  onCallBack: (index) {
+                    setState(() {
+                      selectedPaymentVO = index;
+                    });
+                  },
                 ),
               ),
             ],
@@ -170,14 +213,15 @@ class _HealthIndividualScreenState extends State<HealthIndividualScreen> {
       ),
       bottomNavigationBar: NextBtnWidget(
         formKey: formKey,
-        onNextPressed: () {
-          final isValid = formKey.currentState?.validate();
-          if (isValid!) {
-            CustomNavigationHelper.router.push(
-                Routes.healthAdditionalCoverPath.path
-            );
-          }
-        },
+        onNextPressed: () => _onSubmit(),
+        // onNextPressed: () {
+        //   final isValid = formKey.currentState?.validate();
+        //   if (isValid!) {
+        //     CustomNavigationHelper.router.push(
+        //         Routes.healthAdditionalCoverPath.path
+        //     );
+        //   }
+        // },
         txt: 'next_btn_txt'.tr(),
       ),
     );

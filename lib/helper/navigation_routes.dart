@@ -95,6 +95,7 @@ import '../ui/screens/premiumCalculator/generalInsurance/travel/under_mile_scree
 import '../ui/screens/premiumCalculator/generalInsurance/travel/widget/teavel_premium_details_screen.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/govPersonalShortTerm/gov_personal_payment_screen.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/health/widget/widget_additional_cover.dart';
+import '../ui/screens/premiumCalculator/lifeInsurance/health/widget/widget_health.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/shore_job/shore_job_payment_screen.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/short_term_payment_screen.dart';
 import '../ui/screens/premiumCalculator/lifeInsurance/short_term_endowment/widget/widget_short_term.dart';
@@ -721,7 +722,7 @@ class CustomNavigationHelper {
                 path: Routes.healthAdditionalCoverPath.path,
                 pageBuilder: (context, state) {
                   return MaterialPage(
-                    child: const HealthAdditionalCoverWidget(),
+                    child: HealthAdditionalCoverWidget(arguments: state.extra as HealthWidget,),
                     key: state.pageKey,
                   );
                 },

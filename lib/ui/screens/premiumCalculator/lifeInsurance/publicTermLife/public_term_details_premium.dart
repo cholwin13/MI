@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ import '../../../../../routes/app_routes.dart';
 import '../../../../widgets/app_bar_widget.dart';
 import '../../../../widgets/widget_next_btn.dart';
 import '../../../../widgets/widget_product_info_detail_title.dart';
-import '../../../../widgets/premium_details_arguments_list.dart';
 import '../../../../widgets/widget_normal_txt.dart';
 
 class PublicTermDetailsPremium extends StatefulWidget {

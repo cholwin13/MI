@@ -101,6 +101,21 @@ class RetrofitDataAgentImpl {
     // );
     final httpResponse =
         await _apiService.getLifeProductPremium(lifePCRequest);
+    print("REsponse code is ===> ${httpResponse.response.statusCode}");
+    if (httpResponse.response.statusCode == 200) {
+      return DataSuccess(httpResponse.data);
+    } else {
+      return DataError(DioException(
+        error: httpResponse.response.statusMessage,
+        response: httpResponse.response,
+        requestOptions: httpResponse.response.requestOptions,
+      ));
+    }
+  }
+
+  Future<DataState<List<LifeProductPremiumResponse>>> getHealthLifeProductPremium(LifePCRequest lifePCRequest) async {
+    final httpResponse =
+    await _apiService.getHealthLifeProductPremium(lifePCRequest);
     if (httpResponse.response.statusCode == 200) {
       return DataSuccess(httpResponse.data);
     } else {

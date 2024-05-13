@@ -1,12 +1,21 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:test_pj_mi/helper/app_color.dart';
+import 'package:test_pj_mi/ui/screens/premiumCalculator/lifeInsurance/health/widget/widget_health.dart';
 
+import '../../../../../../core/data_state.dart';
+import '../../../../../../data/vos/life/life_pc_request/life_pc_add_on.dart';
+import '../../../../../../data/vos/life/life_pc_request/life_pc_request.dart';
 import '../../../../../../helper/app_images.dart';
 import '../../../../../../helper/app_strings.dart';
 import '../../../../../../helper/dimens.dart';
 import '../../../../../../helper/navigation_routes.dart';
+import '../../../../../../injector.dart';
+import '../../../../../../network/data_agents/retrofit_data_agent_impl.dart';
+import '../../../../../../network/responses/life_product_premium_response/life_product_premium_response.dart';
 import '../../../../../../routes/app_routes.dart';
 import '../../../../../widgets/app_bar_widget.dart';
 import '../../../../../widgets/premium_details_arguments_list.dart';
@@ -15,7 +24,8 @@ import '../../../../../widgets/widget_product_info_detail_title.dart';
 import '../../../../../widgets/widget_normal_txt.dart';
 
 class HealthAdditionalCoverWidget extends StatefulWidget {
-  const HealthAdditionalCoverWidget({super.key});
+  final HealthWidget arguments;
+  const HealthAdditionalCoverWidget({super.key, required this.arguments});
 
   @override
   State<HealthAdditionalCoverWidget> createState() =>
@@ -27,12 +37,81 @@ class _HealthAdditionalCoverWidgetState
   final formKey = GlobalKey<FormState>();
   bool isOperation = false;
   bool isClinic = false;
+  final operationController = TextEditingController();
+  final clinicController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _onSubmit() {
+    if (formKey.currentState!.validate()) {
+      List<LifePCAddOn> addOnList = [];
+      String operationValue = operationController.text;
+      String clinicValue = clinicController.text;
+
+      if(isOperation == true && operationValue.isNotEmpty){
+        addOnList.add(
+          LifePCAddOn(
+              "ISSYS014001000009603223042019", //  Operation and Miscarriage
+              int.parse(operationValue),
+              {
+                "ISSYS013001000000030730062015": widget.arguments.age,
+                "ISSYS013006000000241813032017": widget.arguments.paymentId
+              })
+        );
+      }
+
+      if(isClinic == true && clinicValue.isNotEmpty){
+        addOnList.add(
+            LifePCAddOn(
+                "ISSYS014001000009603323042019", //  Operation and Miscarriage
+                int.parse(clinicValue),
+                {
+                  "ISSYS013001000000030730062015": widget.arguments.age,
+                  "ISSYS013006000000241813032017": widget.arguments.paymentId
+                })
+        );
+      }
+
+      RetrofitDataAgentImpl test = RetrofitDataAgentImpl(injector());
+      test
+          .getHealthLifeProductPremium(LifePCRequest(
+              "ISPRD003001000009592523042019", // product Id
+              null, //sumInsured
+              null, //paymentType
+              widget.arguments.unit, // unit
+              {
+            "ISSYS013001000000030730062015": widget.arguments.age, //age
+            "ISSYS013006000000241813032017": widget.arguments.paymentId // Payment Type
+          },
+        addOnList// keyFactorMap
+              ))
+          .then((dataState) {
+        if (dataState is DataSuccess) {
+          if (dataState.data != null) {
+            print('Success');
+            List<LifeProductPremiumResponse> responseData =
+                dataState.data as List<LifeProductPremiumResponse>;
+            print(jsonEncode(responseData));
+          } else {
+            print('Fail');
+          }
+        } else if (dataState is DataError) {
+          print("Error -....");
+          print(dataState.error);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
           appBar: AppBarWidget(
             titleIcon: Image.asset(
               AppImages.lifeHealthIcon,
@@ -81,8 +160,7 @@ class _HealthAdditionalCoverWidgetState
                           Checkbox(
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                        checkBoxRadius))),
+                                    Radius.circular(checkBoxRadius))),
                             value: isOperation,
                             onChanged: (bool? value) {
                               setState(() {
@@ -90,21 +168,23 @@ class _HealthAdditionalCoverWidgetState
                               });
                             },
                             checkColor: Colors.white,
-                            activeColor:
-                            context.appColors.colorPrimary,
+                            activeColor: context.appColors.colorPrimary,
                           ),
-                          Expanded(child: NormalTxtWidget(txt: 'health_additional_operation'.tr(), fontSize: textSmall2X, fontColor: context.appColors.colorLabel,)),
+                          Expanded(
+                              child: NormalTxtWidget(
+                            txt: 'health_additional_operation'.tr(),
+                            fontSize: textSmall2X,
+                            fontColor: context.appColors.colorLabel,
+                          )),
                         ],
                       ),
-                      if(isOperation)
-                        const TxtFieldWidget(),
+                      if (isOperation) TxtFieldWidget(controller: operationController,),
                       Row(
                         children: [
                           Checkbox(
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                        checkBoxRadius))),
+                                    Radius.circular(checkBoxRadius))),
                             value: isClinic,
                             onChanged: (bool? value) {
                               setState(() {
@@ -112,51 +192,63 @@ class _HealthAdditionalCoverWidgetState
                               });
                             },
                             checkColor: Colors.white,
-                            activeColor:
-                            context.appColors.colorPrimary,
+                            activeColor: context.appColors.colorPrimary,
                           ),
-                          Expanded(child: NormalTxtWidget(txt: 'health_additional_clinical'.tr(),fontSize: textSmall2X, fontColor: context.appColors.colorLabel,)),
+                          Expanded(
+                              child: NormalTxtWidget(
+                            txt: 'health_additional_clinical'.tr(),
+                            fontSize: textSmall2X,
+                            fontColor: context.appColors.colorLabel,
+                          )),
                         ],
                       ),
-                      if(isClinic)
-                        const TxtFieldWidget(),
+                      if (isClinic) TxtFieldWidget(controller: clinicController,),
                     ],
                   ),
                 ),
-                const Spacer(),
-                KeyboardVisibilityBuilder(builder: (context, visible){
-                  return visible?
-                  const SizedBox()
-                      : NextBtnWidget(
-                    formKey: formKey,
-                    onNextPressed: () {
-                      final isValid = formKey.currentState?.validate();
-                      if(isValid!){
-                        CustomNavigationHelper.router.push(
-                          Routes.lifePremiumDetailsPath.path,
-                          extra: PremiumDetailsArguments(
-                              title: 'health_insurance',
-                              isMMK: true,
-                              appBarIcon:
-                              AppImages.lifeHealthIcon,
-                              isStampFee: true
-                          ),
-                        );
-                      }
-                    },
-                    txt: 'next_btn_txt'.tr(),
-                  );
-                }),
+                // const Spacer(),
+                // KeyboardVisibilityBuilder(builder: (context, visible) {
+                //   return visible
+                //       ? const SizedBox()
+                //       : NextBtnWidget(
+                //           formKey: formKey,
+                //           onNextPressed: () => _onSubmit(),
+                //           // onNextPressed: () {
+                //           //   final isValid = formKey.currentState?.validate();
+                //           //   if(isValid!){
+                //           //     CustomNavigationHelper.router.push(
+                //           //       Routes.lifePremiumDetailsPath.path,
+                //           //       extra: PremiumDetailsArguments(
+                //           //           title: 'health_insurance',
+                //           //           isMMK: true,
+                //           //           appBarIcon:
+                //           //           AppImages.lifeHealthIcon,
+                //           //           isStampFee: true
+                //           //       ),
+                //           //     );
+                //           //   }
+                //           // },
+                //           txt: 'next_btn_txt'.tr(),
+                //         );
+                // }),
               ],
             ),
-          )),
+          ),
+        bottomNavigationBar: NextBtnWidget(
+          formKey: formKey,
+          onNextPressed: () => _onSubmit(),
+          txt: 'next_btn_txt'.tr(),
+        ),
+      ),
     );
   }
 }
 
 class TxtFieldWidget extends StatefulWidget {
+  final TextEditingController controller;
   const TxtFieldWidget({
     super.key,
+    required this.controller
   });
 
   @override
@@ -164,13 +256,13 @@ class TxtFieldWidget extends StatefulWidget {
 }
 
 class _TxtFieldWidgetState extends State<TxtFieldWidget> {
-  final _controller = TextEditingController();
+  // final _controller = TextEditingController();
 
-  String? validateText(value){
+  String? validateText(value) {
     final double si = double.tryParse(value!) ?? 0.0;
-    if(si != 1){
+    if (si != 1) {
       return AppStrings.healthMinMaxErrTxt;
-    }else {
+    } else {
       return null;
     }
   }
@@ -179,15 +271,21 @@ class _TxtFieldWidgetState extends State<TxtFieldWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        NormalTxtWidget(txt: AppStrings.healthMinMaxTxt, fontSize: textSmall2X, fontColor: context.appColors.colorLabel,),
-        const SizedBox(height: kMarginCardMedium,),
+        NormalTxtWidget(
+          txt: AppStrings.healthMinMaxTxt,
+          fontSize: textSmall2X,
+          fontColor: context.appColors.colorLabel,
+        ),
+        const SizedBox(
+          height: kMarginCardMedium,
+        ),
         SizedBox(
           width: 150.0,
           child: TextFormField(
-            onTapOutside: (value){
+            onTapOutside: (value) {
               FocusManager.instance.primaryFocus?.unfocus();
             },
-            controller: _controller,
+            controller: widget.controller,
             validator: validateText,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(kMarginCardMedium),
@@ -222,7 +320,9 @@ class _TxtFieldWidgetState extends State<TxtFieldWidget> {
             textInputAction: TextInputAction.done,
           ),
         ),
-        const SizedBox(height: kMarginCardMedium,),
+        const SizedBox(
+          height: kMarginCardMedium,
+        ),
       ],
     );
   }

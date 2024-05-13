@@ -5,6 +5,7 @@ const String baseUrl= "https://mionlineapi.com:8443";
 /// End Points
 const String endPointGetPrintCertificateForTpl = "/miwsp/ws/recordsHistory";
 const String endPointLifePremiumCalculator = "/milifeapi/ws/getLifeProductPremium";
+const String endPointHealthLifePremiumPc = "/milifeapi/ws/getHealthProductPremium";
 
 /// Header
 const String headerAccept = "Accept";

@@ -15,8 +15,8 @@ LifePCRequest _$LifePCRequestFromJson(Map<String, dynamic> json) =>
       (json['keyFactorMap'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
       ),
-      (json['addOnList'] as List<dynamic>)
-          .map((e) => LifePCAddOn.fromJson(e as Map<String, dynamic>))
+      (json['addOnList'] as List<dynamic>?)
+          ?.map((e) => LifePCAddOn.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
